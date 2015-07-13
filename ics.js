@@ -23,7 +23,7 @@ class ICS {
   }
 
   toBase64() {
-    const reader = window.FileReaderSync();
+    const reader = window.FileReader();
     reader.readAsDataURL(this.toBlob());
     return reader.onloadend = () => reader.result;
   }

@@ -22,10 +22,12 @@ class ICS {
     return new Blob([this.toString()], { type: "text/calendar" });
   }
 
-  toBase64() {
+  toBase64(callback) {
     const reader = new window.FileReader();
     reader.readAsDataURL(this.toBlob());
-    return reader.onloadend = () => reader.result;
+    reader.onloadend = function() {
+      callback(reader.result);
+    }
   }
 }
 

@@ -1,15 +1,6 @@
 class ICS {
   static SEPARATOR = "\n";
 
-  static CALENDAR_START = function() {
-    return [
-      "BEGIN:VCALENDAR",
-      "VERSION:2.0"
-    ].join(ICS.SEPARATOR);
-  }
-
-  static CALENDAR_END = "END:VCALENDAR";
-
   constructor() {
     this.events = [];
   }
@@ -20,10 +11,20 @@ class ICS {
     const events = this.events.map((event) => event.toString());
 
     return [
-      ICS.CALENDAR_START(),
+      "BEGIN:VCALENDAR",
+      "VERSION:2.0",
       events.join(ICS.SEPARATOR),
-      ICS.CALENDAR_END
+      "END:VCALENDAR"
     ].join(ICS.SEPARATOR);
+  }
+
+  toBlob() {
+    return new Blob([this.toString]);
+  }
+
+  toBase64() {
+    const reader = window.FileReaderSync();
+    return reader.readAsDataURL(this.toBlob());
   }
 }
 

@@ -19,7 +19,7 @@ class ICS {
   }
 
   toBlob() {
-    return new Blob([this.toString()]);
+    return new Blob([this.toString()], { type: "text/calendar" });
   }
 
   toBase64() {

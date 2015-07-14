@@ -32,12 +32,25 @@ event.end = new Date(Date.parse("08 Jul 2015 11:30:00 PST"));
 cal.addEvent(event);
 ```
 
+Get a list of events:
+
+```js
+// Note: #events() is not mutable. Use #addEvent() to add events.
+cal.events();
+```
+
 Get the ICS file:
 
 ```js
 cal.toString(); // Get a string.
 cal.toBlob(); // Get a Blob.
 cal.toBase64(); // Get a base64 string.
+```
+
+Clear all events:
+
+```js
+cal.reset();
 ```
 
 ## Acknowledgements

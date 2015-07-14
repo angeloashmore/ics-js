@@ -1,6 +1,6 @@
 import { InvalidEventError } from "errors";
 
-export class Event {
+export default class Event {
   static SEPARATOR = "\n";
 
   constructor() {

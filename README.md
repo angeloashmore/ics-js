@@ -29,7 +29,7 @@ event.location = "Moscone Center West";
 event.start = new Date(Date.parse("08 Jul 2015 09:00:00 PST"));
 event.end = new Date(Date.parse("08 Jul 2015 11:30:00 PST"));
 
-cal.events.push(event);
+cal.addEvent(event);
 ```
 
 Get the ICS file:

@@ -1,5 +1,5 @@
 # ics-js
-Create ICS files in JavaScript.
+Create ICS files in ES6 JavaScript.
 
 ## Installation
 

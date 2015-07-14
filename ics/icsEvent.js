@@ -1,6 +1,6 @@
-import InvalidEventError from "errors/invalidEventError";
+import InvalidEventError from "./errors/invalidEventError";
 
-export default class Event {
+export default class ICSEvent {
   static SEPARATOR = "\n";
 
   constructor() {
@@ -19,6 +19,8 @@ export default class Event {
         this.start == undefined ||
         this.end == undefined) {
       return false;
+    } else {
+      return true;
     }
   }
 
@@ -35,10 +37,10 @@ export default class Event {
       "DTSTART;VALUE=DATE:" + ICSEvent.dateToICSFormat(this.start),
       "DTEND;VALUE=DATE:" + ICSEvent.dateToICSFormat(this.end),
       "SUMMARY;LANGUAGE=en-us:" + this.subject,
-      optionals.join(Event.SEPARATOR),
+      optionals.join(ICSEvent.SEPARATOR),
       "TRANSP:TRANSPARENT",
       "END:VEVENT"
-    ].join(Event.SEPARATOR);
+    ].join(ICSEvent.SEPARATOR);
   }
 
   static dateToICSFormat(date) {

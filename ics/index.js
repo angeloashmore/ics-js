@@ -1,17 +1,22 @@
-import Event from "event";
-import NoEventsError from "errors/noEventsError";
+import ICSEvent from "./icsEvent";
+import NoEventsError from "./errors/noEventsError";
+import InvalidEventError from "./errors/invalidEventError";
 
 export default class ICS {
   static MIME_TYPE = "text/calendar";
   static SEPARATOR = "\n";
-  static Event = Event;
+  static Event = ICSEvent;
 
   constructor() {
-    this.events = [];
+    this._events = [];
+  }
+
+  events() {
+    return Object.freeze(this._events.slice(0));
   }
 
   addEvent(event) {
-    if (!(event instanceof Event)) {
+    if (!(event instanceof ICS.Event)) {
       throw new TypeError("Argument `event` must be an instance of ICSEvent.");
     } else if (!event.isValid()) {
       throw new InvalidEventError();
@@ -20,10 +25,14 @@ export default class ICS {
     this._events.push(event);
   }
 
-  toString() {
-    if (this.events.length < 1) throw new NoEventsError();
+  reset() {
+    return this._events = [];
+  }
 
-    const events = this.events.map((event) => event.toString());
+  toString() {
+    if (this._events.length < 1) throw new NoEventsError();
+
+    const events = this._events.map((event) => event.toString());
 
     return [
       "BEGIN:VCALENDAR",

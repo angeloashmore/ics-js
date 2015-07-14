@@ -1,8 +1,8 @@
 import assert from "assert";
-import ICS from "../ics/index.js";
-import ICSEvent from "../ics/icsEvent.js";
-import InvalidEventError from "../ics/errors/invalidEventError.js";
-import NoEventsError from "../ics/errors/noEventsError.js";
+import ICS from "../ics-js/index.js";
+import ICSEvent from "../ics-js/icsEvent.js";
+import InvalidEventError from "../ics-js/errors/invalidEventError.js";
+import NoEventsError from "../ics-js/errors/noEventsError.js";
 
 const cal = new ICS();
 

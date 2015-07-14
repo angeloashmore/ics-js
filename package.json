@@ -2,7 +2,7 @@
   "name": "ics-js",
   "version": "0.1.0",
   "description": "Create ICS files in Javascript",
-  "main": "ics.js",
+  "main": "ICS.min.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack"

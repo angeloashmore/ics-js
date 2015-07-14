@@ -1,9 +1,11 @@
+var webpack = require("webpack");
+
 module.exports = {
   entry: "./ICS.js",
 
   output: {
     path: __dirname,
-    filename: "bundle.js"
+    filename: "ICS.es5.min.js"
   },
 
   resolve: {
@@ -15,5 +17,12 @@ module.exports = {
     loaders: [
       { test: /\.js$/, exclude: /node_modules/, loader: "babel-loader?stage=0"}
     ]
-  }
+  },
+
+  plugins: [
+    new webpack.optimize.UglifyJsPlugin({
+      compress: true,
+      mangle: true
+    })
+  ]
 };

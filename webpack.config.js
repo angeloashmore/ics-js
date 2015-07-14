@@ -1,11 +1,13 @@
 var webpack = require("webpack");
 
 module.exports = {
+  devtool: 'sourcemap',
+
   entry: "./ics/index.js",
 
   output: {
     path: __dirname,
-    filename: "ics.min.js"
+    filename: "ics.js"
   },
 
   resolve: {
@@ -17,12 +19,5 @@ module.exports = {
     loaders: [
       { test: /\.js$/, exclude: /node_modules/, loader: "babel-loader?stage=0"}
     ]
-  },
-
-  plugins: [
-    new webpack.optimize.UglifyJsPlugin({
-      compress: true,
-      mangle: true
-    })
-  ]
+  }
 };

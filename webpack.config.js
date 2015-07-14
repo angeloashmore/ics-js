@@ -1,15 +1,15 @@
 var webpack = require("webpack");
 
 module.exports = {
-  entry: "./ICS.js",
+  entry: "./ics/index.js",
 
   output: {
     path: __dirname,
-    filename: "ICS.es5.min.js"
+    filename: "ics.min.js"
   },
 
   resolve: {
-    modulesDirectories: ["node_modules", "."],
+    modulesDirectories: ["node_modules", "./ics"],
     extensions: ["", ".js"]
   },
 

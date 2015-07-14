@@ -1,5 +1,4 @@
 import assert from "assert";
-import sinon from "sinon";
 import ICS from "../ics/index.js";
 import ICSEvent from "../ics/icsEvent.js";
 import InvalidEventError from "../ics/errors/invalidEventError.js";

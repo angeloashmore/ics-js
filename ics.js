@@ -1,5 +1,5 @@
 import Event from "Event";
-import { NoEventsError } from "errors";
+import NoEventsError from "errors/NoEventsError";
 
 export default class ICS {
   static MIME_TYPE = "text/calendar";

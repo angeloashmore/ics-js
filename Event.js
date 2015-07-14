@@ -1,4 +1,4 @@
-import { InvalidEventError } from "errors";
+import InvalidEventError from "errors/InvalidEventError";
 
 export default class Event {
   static SEPARATOR = "\n";

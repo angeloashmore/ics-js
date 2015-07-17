@@ -1,7 +1,7 @@
 import transformers from "./transformers";
 
 export default class Property {
-  constructor(key, value) {
+  constructor(key, value, skipTransformer) {
     if (key == undefined || value == undefined) throw new TypeError();
 
     this.key = key.toUpperCase();
@@ -9,7 +9,7 @@ export default class Property {
     if (keyRegex.test(this.key) === false) throw new TypeError();
 
     const transformer = transformers[this.key];
-    this.value = !!transformer ? transformer(value) : value;
+    this.value = !!transformer && !skipTransformer ? transformer(value) : value;
   }
 
   toString() {

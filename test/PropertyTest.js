@@ -6,11 +6,14 @@ const propValue = "1991-03-07 07:00:00 AM";
 const propValueAfterTransformer = "19910307T070000";
 const prop = new ICS.Property(propKey, propValue);
 
+const propSkipTransformer = new ICS.Property(propKey, propValue, true);
+
 const invalidPropKey = "-invalid1-";
 
 const propKeyWOTransformer = "LOCATION";
 const propValueWOTransformer = "Location";
 const propWOTransformer = new ICS.Property(propKeyWOTransformer, propValueWOTransformer);
+
 
 describe("Property", function() {
   describe("#constructor()", function() {
@@ -43,6 +46,10 @@ describe("Property", function() {
     describe("if transformer is available", function() {
       it("should transform the value", function() {
         assert.equal(prop.value, propValueAfterTransformer);
+      });
+
+      it("should not transform the value if `skipTransformer` is true", function() {
+        assert.equal(propSkipTransformer.value, propValue);
       });
     });
 

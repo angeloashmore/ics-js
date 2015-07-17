@@ -2,7 +2,7 @@
   "name": "ics-js",
   "version": "0.3.0",
   "description": "Create ICS files in Javascript",
-  "main": "index.js",
+  "main": "ics-js/ICS.js",
   "scripts": {
     "test": "mocha --compilers js:babel/register",
     "build": "webpack"
@@ -28,7 +28,6 @@
     "node-libs-browser": "^0.5.2"
   },
   "dependencies": {
-    "es6-error": "^1.0.0",
     "format-date": "0.0.1"
   }
 }

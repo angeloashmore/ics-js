@@ -4,7 +4,7 @@ export default class Component {
   static separator = "\n";
   static requiredProps = [];
   static singletonProps = [];
-  static transformers = new Map();
+  static propTransformers = new Map();
 
   constructor() {
     this.prefix = `BEGIN:${this.constructor.name}`;

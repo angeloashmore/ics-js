@@ -22,6 +22,11 @@ describe("Property", function() {
       assert.equal(prop.key != undefined, true);
       assert.equal(prop.value != undefined, true);
     });
+
+    it("should throw a TypeError if `key` or `value` is undefined", function() {
+      assert.throws(() => new ICS.Property(propKey), TypeError);
+      assert.throws(() => new ICS.Property(), TypeError);
+    });
   });
 
   describe("#key", function() {

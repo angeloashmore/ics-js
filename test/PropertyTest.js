@@ -1,10 +1,16 @@
 import assert from "assert";
 import ICS from "../ics-js/ICS";
 
-const propKey = "key";
-const propValue = "value";
-const invalidPropKey = "-invalid1-";
+const propKey = "dtstart";
+const propValue = "1991-03-07 07:00:00 AM";
+const propValueAfterTransformer = "19910307T070000";
 const prop = new ICS.Property(propKey, propValue);
+
+const invalidPropKey = "-invalid1-";
+
+const propKeyWOTransformer = "LOCATION";
+const propValueWOTransformer = "Location";
+const propWOTransformer = new ICS.Property(propKeyWOTransformer, propValueWOTransformer);
 
 describe("Property", function() {
   describe("#constructor()", function() {
@@ -16,13 +22,29 @@ describe("Property", function() {
       assert.equal(prop.key != undefined, true);
       assert.equal(prop.value != undefined, true);
     });
+  });
 
+  describe("#key", function() {
     it("should convert a lowercase `key` to uppercase", function() {
       assert.equal(prop.key, propKey.toUpperCase());
     });
 
     it("should throw a TypeError if passed an invalid `key`", function() {
       assert.throws(() => new ICS.Property(invalidPropKey, propValue), TypeError);
+    });
+  });
+
+  describe("#value", function() {
+    describe("if transformer is available", function() {
+      it("should transform the value", function() {
+        assert.equal(prop.value, propValueAfterTransformer);
+      });
+    });
+
+    describe("if transformer is not available", function() {
+      it("should leave the value untouched", function() {
+        assert.equal(propWOTransformer.value, propValueWOTransformer);
+      });
     });
   });
 

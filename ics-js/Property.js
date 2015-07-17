@@ -8,11 +8,8 @@ export default class Property {
     const keyRegex = /^[A-Z]([A-Z]|-)*[A-Z]$/;
     if (keyRegex.test(this.key) === false) throw new TypeError();
 
-    if (transformers[key] != undefined) {
-      this.value = transformers[key](value);
-    } else {
-      this.value = value;
-    }
+    const transformer = transformers[this.key];
+    this.value = !!transformer ? transformer(value) : value;
   }
 
   toString() {

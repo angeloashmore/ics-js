@@ -1,3 +1,4 @@
 import DTSTART from "./DTSTART";
 
-export default DTSTART;
+export default class DTEND extends DTSTART {
+}

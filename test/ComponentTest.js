@@ -1,10 +1,9 @@
 import assert from "assert";
 import ICS from "../ics-js/ICS";
-import Component from "../ics-js/Component";
 
-const component = new Component();
+const component = new ICS.Component();
 const prop = new ICS.Property("KEY", "VALUE");
-const component_2 = new Component();
+const component_2 = new ICS.Component();
 
 describe("Component", function() {
   beforeEach(function() {
@@ -13,7 +12,7 @@ describe("Component", function() {
 
   describe("#constructor()", function() {
     it("should create a new instance of Component", function() {
-      assert.equal(component instanceof Component, true);
+      assert.equal(component instanceof ICS.Component, true);
     });
 
     it("should have an empty `_props` instance property", function() {

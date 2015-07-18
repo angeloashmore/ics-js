@@ -1,10 +1,13 @@
 import formatDate from "format-date";
+import Transformer from "../Transformer";
 
-export default function(value) {
-  if (/[0-9]{8}T[0-9]{6}/.test(value)) return value;
+export default class DTSTART extends Transformer {
+  static execute(input) {
+    if (/[0-9]{8}T[0-9]{6}/.test(input)) return input;
 
-  const date = new Date(Date.parse(value));
-  const format = "{year}{month}{day}T{hours}{minutes}{seconds}";
+    const date = new Date(Date.parse(input));
+    const format = "{year}{month}{day}T{hours}{minutes}{seconds}";
 
-  return formatDate(format, date);
+    return formatDate(format, date);
+  }
 }

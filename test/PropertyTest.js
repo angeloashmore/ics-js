@@ -14,8 +14,36 @@ const propKeyWOTransformer = "LOCATION";
 const propValueWOTransformer = "Location";
 const propWOTransformer = new ICS.Property(propKeyWOTransformer, propValueWOTransformer);
 
+const DTSTARTTransformer = ICS.transformers.DTSTART;
+const DefaultTransformer = ICS.transformers.Default;
 
 describe("Property", function() {
+  describe("::keyRegex", function() {
+    const keyRegex = ICS.Property.keyRegex;
+
+    it("should return false for keys containing lowercase characters", function() {
+      assert.equal(keyRegex.test(propKey), false);
+    });
+
+    it("should return false for keys containing invalid characters", function() {
+      assert.equal(keyRegex.test(invalidPropKey), false);
+    });
+
+    it("should return true for a valid key", function() {
+      assert.equal(keyRegex.test(propKeyWOTransformer), true);
+    });
+  });
+
+  describe("::transformerFor()", function() {
+    it("should return the correct transformer for the key", function() {
+      assert.equal(ICS.Property.transformerFor(prop.key), DTSTARTTransformer);
+    });
+
+    it("should return the default transformer if one does not exist for the key", function() {
+      assert.equal(ICS.Property.transformerFor(propKeyWOTransformer), DefaultTransformer);
+    });
+  });
+
   describe("#constructor()", function() {
     it("should create a new instance of ICS.Property", function() {
       assert.equal(prop instanceof ICS.Property, true);

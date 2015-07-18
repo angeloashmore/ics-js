@@ -2,7 +2,7 @@ import assert from "assert";
 import ICS from "../ics-js/ICS";
 
 const component = new ICS.Component();
-const prop = new ICS.Property("KEY", "VALUE");
+const prop = new ICS.properties.DTSTART("1991-03-07 07:00:00");
 const component_2 = new ICS.Component();
 
 describe("Component", function() {

@@ -1,21 +1,28 @@
-import transformers from "./transformers";
-
 export default class Property {
   static keyRegex = /^[A-Z]([A-Z]|-)*[A-Z]$/;
+  static propName = "Property";
 
-  static transformerFor(key) {
-    return transformers[key] || transformers.Default;
+  constructor(value, skipTransformer = false) {
+    if (value == undefined) throw new TypeError();
+
+    this.value = value;
+    this.skipTransformer = skipTransformer;
   }
 
-  constructor(key, value, skipTransformer = false) {
-    if (key == undefined || value == undefined) throw new TypeError();
-    if (Property.keyRegex.test(key.toUpperCase()) === false) throw new TypeError();
+  shortTransformer() {
+    return true;
+  }
 
-    this.key = key.toUpperCase();
-    this.value = skipTransformer ? value : Property.transformerFor(this.key).execute(value);
+  transformer() {
+    return this.value;
+  }
+
+  transformedValue() {
+    if (this.skipTransformer || this.shortTransformer()) return this.value;
+    return this.transformer(this.value);
   }
 
   toString() {
-    return `${this.key}:${this.value}`;
+    return `${this.constructor.propName}:${this.transformedValue()}`;
   }
 }

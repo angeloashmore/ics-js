@@ -1,14 +1,11 @@
 import Property from "./Property";
-import Transformer from "./Transformer";
-import transformers from "./transformers";
+import properties from "./properties";
 import Component from "./Component";
 import components from "./components";
 
 export default class ICS {
   static Property = Property;
-
-  static Transformer = Transformer;
-  static transformers = transformers;
+  static properties = properties;
 
   static Component = Component;
   static components = components;

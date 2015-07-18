@@ -1,46 +1,21 @@
 import assert from "assert";
 import ICS from "../ics-js/ICS";
 
-const propKey = "dtstart";
-const propValue = "1991-03-07 07:00:00 AM";
-const propValueAfterTransformer = "19910307T070000";
-const prop = new ICS.Property(propKey, propValue);
-
-const propSkipTransformer = new ICS.Property(propKey, propValue, true);
-
-const invalidPropKey = "-invalid1-";
-
-const propKeyWOTransformer = "LOCATION";
-const propValueWOTransformer = "Location";
-const propWOTransformer = new ICS.Property(propKeyWOTransformer, propValueWOTransformer);
-
-const DTSTARTTransformer = ICS.transformers.DTSTART;
-const DefaultTransformer = ICS.transformers.Default;
+const validName = "DSTART";
+const invalidName = "-DStart-";
+const value = "value";
+const prop = new ICS.Property(value);
 
 describe("Property", function() {
   describe("::keyRegex", function() {
     const keyRegex = ICS.Property.keyRegex;
 
-    it("should return false for keys containing lowercase characters", function() {
-      assert.equal(keyRegex.test(propKey), false);
-    });
-
     it("should return false for keys containing invalid characters", function() {
-      assert.equal(keyRegex.test(invalidPropKey), false);
+      assert.equal(keyRegex.test(invalidName), false);
     });
 
     it("should return true for a valid key", function() {
-      assert.equal(keyRegex.test(propKeyWOTransformer), true);
-    });
-  });
-
-  describe("::transformerFor()", function() {
-    it("should return the correct transformer for the key", function() {
-      assert.equal(ICS.Property.transformerFor(prop.key), DTSTARTTransformer);
-    });
-
-    it("should return the default transformer if one does not exist for the key", function() {
-      assert.equal(ICS.Property.transformerFor(propKeyWOTransformer), DefaultTransformer);
+      assert.equal(keyRegex.test(validName), true);
     });
   });
 
@@ -49,42 +24,31 @@ describe("Property", function() {
       assert.equal(prop instanceof ICS.Property, true);
     });
 
-    it("should have defined `key` and `value` instance properties", function() {
-      assert.equal(prop.key != undefined, true);
+    it("should have defined `value` and `skipTransformer` instance properties", function() {
       assert.equal(prop.value != undefined, true);
+      assert.equal(prop.skipTransformer != undefined, true);
     });
 
-    it("should throw a TypeError if `key` or `value` is undefined", function() {
-      assert.throws(() => new ICS.Property(propKey), TypeError);
+    it("should throw a TypeError if `value` is undefined", function() {
       assert.throws(() => new ICS.Property(), TypeError);
     });
   });
 
-  describe("#key", function() {
-    it("should convert a lowercase `key` to uppercase", function() {
-      assert.equal(prop.key, propKey.toUpperCase());
-    });
-
-    it("should throw a TypeError if passed an invalid `key`", function() {
-      assert.throws(() => new ICS.Property(invalidPropKey, propValue), TypeError);
+  describe("#shortTransformer()", function() {
+    it("should return true", function() {
+      assert.equal(prop.shortTransformer(), true);
     });
   });
 
-  describe("#value", function() {
-    describe("if transformer is available", function() {
-      it("should transform the value", function() {
-        assert.equal(prop.value, propValueAfterTransformer);
-      });
-
-      it("should not transform the value if `skipTransformer` is true", function() {
-        assert.equal(propSkipTransformer.value, propValue);
-      });
+  describe("#transformer()", function() {
+    it("should return value untouched", function() {
+      assert.equal(prop.transformer(), value);
     });
+  });
 
-    describe("if transformer is not available", function() {
-      it("should leave the value untouched", function() {
-        assert.equal(propWOTransformer.value, propValueWOTransformer);
-      });
+  describe("#transformedValue()", function() {
+    it("should return value untouched", function() {
+      assert.equal(prop.transformer(), value);
     });
   });
 

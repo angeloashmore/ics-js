@@ -1,8 +1,7 @@
 import assert from "assert";
 import ICS from "../ics-js/ICS";
 import Property from "../ics-js/Property";
-import Transformer from "../ics-js/Transformer";
-import transformers from "../ics-js/transformers";
+import properties from "../ics-js/properties";
 import Component from "../ics-js/Component";
 import components from "../ics-js/components";
 
@@ -13,15 +12,9 @@ describe("ICS", function() {
     it("should return the Property class", function() {
       assert.equal(ICS.Property, Property);
     });
-  });
 
-  describe("Transformer", function() {
-    it("should return the Transformer class", function() {
-      assert.equal(ICS.Transformer, Transformer);
-    });
-
-    it("should return an array of Transformers", function() {
-      assert.equal(ICS.transformers, transformers);
+    it("should return an array of Properties", function() {
+      assert.equal(ICS.properties, properties);
     })
   });
 

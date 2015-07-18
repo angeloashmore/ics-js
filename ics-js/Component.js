@@ -4,11 +4,10 @@ export default class Component {
   static separator = "\n";
   static requiredProps = [];
   static singletonProps = [];
-  static propTransformers = new Map();
 
   constructor() {
-    this.prefix = `BEGIN:${this.constructor.name}`;
-    this.suffix = `END:${this.constructor.name}`;
+    this.prefix = `BEGIN:${this.constructor.componentName}`;
+    this.suffix = `END:${this.constructor.componentName}`;
 
     this._props = [];
     this._components = [];

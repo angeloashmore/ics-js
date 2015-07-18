@@ -2,14 +2,10 @@ import Component from "../Component";
 
 export default class VCALENDAR extends Component {
   static requiredProps = [
-    "PRODID",
-    "VERSION"
+    "PRODID", "VERSION"
   ];
 
   static singletonProps = [
-    "PRODID",
-    "VERSION",
-    "CALSCALE",
-    "METHOD"
+    "PRODID", "VERSION", "CALSCALE", "METHOD"
   ];
 }

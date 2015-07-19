@@ -23,6 +23,7 @@ The following components are implenented:
 
 * `VCALENDAR`
 * `VEVENT`
+* `VALARM`
 
 ### Add properties to a component
 

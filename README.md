@@ -36,10 +36,10 @@ can be added according to the RFC 5545 spec.
 
 The following properties are implemented:
 
-* `DTEND` - Formats a Date object to standard.
-* `DTSTAMP` - Formats a Date object to standard.
-* `DTSTART` - Formats a Date object to standard.
-* `VERSION` - Formats a Number object to "x.0"
+* `DTEND` - Formats a Date object to spec.
+* `DTSTAMP` - Formats a Date object to spec.
+* `DTSTART` - Formats a Date object to spec.
+* `VERSION` - Formats a Number object to spec.
 
 Other properties (e.g. `SUMMARY`, `LOCATION`) will be stored as-is.
 

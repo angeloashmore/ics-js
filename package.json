@@ -28,6 +28,7 @@
     "node-libs-browser": "^0.5.2"
   },
   "dependencies": {
+    "es6-error": "^1.0.0",
     "format-date": "0.0.1"
   }
 }

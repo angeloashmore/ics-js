@@ -1,5 +1,11 @@
 import assert from "assert";
 import ICS from "../ics-js/ICS";
+import {
+  InvalidComponentError,
+  InvalidProvidedComponentError,
+  InvalidProvidedPropError,
+  ValidationError
+} from "../ics-js/errors";
 
 const component = new ICS.components.VCALENDAR();
 const prop = new ICS.properties.VERSION(2);
@@ -64,18 +70,18 @@ describe("Component", function() {
       assert.deepEqual(component._props, [prop]);
     });
 
-    it("should throw an Error if not passed an instance of Property", function() {
-      assert.throws(() => component.addProp("prop"), Error);
+    it("should throw a TypeError if not passed an instance of Property", function() {
+      assert.throws(() => component.addProp("prop"), TypeError);
     });
 
-    it("should throw an Error if passed an invalid (for the component) prop", function() {
+    it("should throw an InvalidProvidedPropError if passed an invalid (for the component) prop", function() {
       const invalid_prop = new ICS.properties.DTSTART(new Date());
-      assert.throws(() => component.addProp(invalid_prop), Error);
+      assert.throws(() => component.addProp(invalid_prop), InvalidProvidedPropError);
     });
 
     it("should throw an Error if passed a prop against its requirement validations", function() {
       component.addProp(prop);
-      assert.throws(() => component.addProp(prop), Error);
+      assert.throws(() => component.addProp(prop), ValidationError);
     });
   });
 
@@ -119,13 +125,13 @@ describe("Component", function() {
       assert.deepEqual(component._components, [component_2]);
     });
 
-    it("should throw an Error if not passed an instance of Component", function() {
-      assert.throws(() => component.addComponent("component"), Error);
+    it("should throw a TypeError if not passed an instance of Component", function() {
+      assert.throws(() => component.addComponent("component"), TypeError);
     });
 
-    it("should throw an Error if passed an invalid (for the component) component", function() {
+    it("should throw an InvalidProvidedComponentError if passed an invalid (for the component) component", function() {
       const invalid_component = new ICS.components.VCALENDAR();
-      assert.throws(() => component.addComponent(invalid_component), Error);
+      assert.throws(() => component.addComponent(invalid_component), InvalidProvidedComponentError);
     });
   });
 
@@ -140,9 +146,9 @@ describe("Component", function() {
   });
 
   describe("#validateRequired()", function() {
-    it("should throw an error if missing required props", function() {
+    it("should throw an InvalidComponentError if missing required props", function() {
       component.addProp(prop);
-      assert.throws(() => component.validateRequired(), Error);
+      assert.throws(() => component.validateRequired(), InvalidComponentError);
     });
 
     it("should return true if all required props are present", function() {

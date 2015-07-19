@@ -1,5 +1,5 @@
 import Component from "../Component";
-import validators from "./validators";
+import { singleton } from "./validators";
 
 export default class VCALENDAR extends Component {
   static componentName = "VCALENDAR";
@@ -7,11 +7,11 @@ export default class VCALENDAR extends Component {
   static requiredProps = ["PRODID", "VERSION"];
 
   static validProps = {
-    "PRODID":    [validators.singleton()],
-    "VERSION":   [validators.singleton()],
+    "PRODID":    [singleton()],
+    "VERSION":   [singleton()],
 
-    "CALSCALE":  [validators.singleton()],
-    "METHOD":    [validators.singleton()],
+    "CALSCALE":  [singleton()],
+    "METHOD":    [singleton()],
   }
 
   static validComponents = {

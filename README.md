@@ -15,20 +15,16 @@ import ICS from "ics-js";
 
 ### Create a component
 
+```js
+const cal = new ICS.components.VCALENDAR();
+```
+
 The following components are implenented:
 
 * `VCALENDAR`
 * `VEVENT`
 
-To create a component:
-
-```js
-const cal = new ICS.components.VCALENDAR();
-```
-
 ### Add properties to a component
-
-To add a property to a component:
 
 ```js
 cal.addProp(new ICS.properties.VERSION(2)); // Number(2) is converted to "2.0"
@@ -47,9 +43,7 @@ The following properties are implemented:
 
 Other properties (e.g. `SUMMARY`, `LOCATION`) will be stored as-is.
 
-### Add a component
-
-To add a component to another component:
+### Nest a component
 
 ```js
 const event = new ICS.components.VEVENT();
@@ -60,7 +54,7 @@ cal.addComponent(event);
 ```
 
 Each component contains a list of valid nested components. Only valid components
-can be added according to the RFC 5545 spec.
+can be nested according to the RFC 5545 spec.
 
 ### Generate ICS data
 

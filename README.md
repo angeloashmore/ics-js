@@ -58,8 +58,6 @@ can be nested according to the RFC 5545 spec.
 
 ### Generate ICS data
 
-To generate the ICS data:
-
 ```js
 cal.toString(); // Returns a string
 ICS.toBlob(cal.toString()); // Returns a Blob

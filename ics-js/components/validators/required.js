@@ -1,5 +1,6 @@
 import Property from "../../Property";
 import Component from "../../Component";
+import { ValidationError } from "../../errors";
 
 export default function required() {
   return (component, subject) => {
@@ -13,6 +14,6 @@ export default function required() {
       names = component.componentNames();
     }
 
-    if (!names.includes(subjectName)) throw new Error();
+    if (!names.includes(subjectName)) throw new ValidationError();
   }
 }

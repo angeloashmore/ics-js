@@ -3,7 +3,7 @@ export default class Property {
   static propName = "Property";
 
   constructor(value, skipTransformer = false) {
-    if (value == undefined) throw new TypeError();
+    if (value == undefined) throw new TypeError("Expected `value` to not be undefined.");
 
     this.value = value;
     this.skipTransformer = skipTransformer;

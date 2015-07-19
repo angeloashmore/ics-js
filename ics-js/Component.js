@@ -1,4 +1,9 @@
 import Property from "./Property";
+import {
+  InvalidComponentError,
+  InvalidProvidedComponentError,
+  InvalidProvidedPropError
+} from "./errors";
 
 export default class Component {
   static separator = "\n";
@@ -28,8 +33,8 @@ export default class Component {
     const { validProps } = this.constructor;
     const { propName } = prop.constructor;
 
-    if (!(prop instanceof Property)) throw new TypeError();
-    if (!validProps[propName]) throw new TypeError();
+    if (!(prop instanceof Property)) throw new TypeError("Expected `prop` to be an instance of Property.");
+    if (!validProps[propName]) throw new InvalidProvidedPropError();
 
     validProps[propName].forEach(validator => validator(this, prop));
 
@@ -49,8 +54,8 @@ export default class Component {
     const { validComponents } = this.constructor;
     const { componentName } = component.constructor;
 
-    if (!(component instanceof Component)) throw new TypeError();
-    if (!validComponents[componentName]) throw new TypeError();
+    if (!(component instanceof Component)) throw new TypeError("Expected `component` to be an instance of Component.");
+    if (!validComponents[componentName]) throw new InvalidProvidedComponentError();
 
     validComponents[componentName].forEach(validator => validator(this, component));
 
@@ -67,7 +72,7 @@ export default class Component {
 
     const intersection = Component._intersect(requiredProps, this.propNames());
 
-    if (intersection.length > 0) throw new Error("Validation failed");
+    if (intersection.length > 0) throw new InvalidComponentError();
 
     return true;
   }

@@ -1,6 +1,6 @@
 {
   "name": "ics-js",
-  "version": "0.6.1",
+  "version": "0.6.2",
   "description": "Create ICS files in ES6 Javascript",
   "main": "ics-js/ICS.js",
   "scripts": {

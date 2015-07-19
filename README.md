@@ -41,7 +41,7 @@ The following properties are implemented:
 * `DTSTART` - Formats a Date object to spec.
 * `VERSION` - Formats a Number object to spec.
 
-Other properties (e.g. `SUMMARY`, `LOCATION`) will be stored as-is.
+Other properties (e.g. `SUMMARY`, `LOCATION`) are stored as-is without transformations.
 
 ### Nest a component
 

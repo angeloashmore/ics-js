@@ -19,7 +19,7 @@ export default class Property {
 
   transformedValue() {
     if (this.skipTransformer || this.shortTransformer()) return this.value;
-    return this.transformer(this.value);
+    return this.transformer();
   }
 
   toString() {

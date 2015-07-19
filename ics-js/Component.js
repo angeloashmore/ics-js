@@ -92,6 +92,7 @@ export default class Component {
   }
 
   static _intersect(a, b) {
-    return a.filter(item => !b.includes(item));
+    const b_ = new Set(b);
+    return a.filter(item => !b_.has(item));
   }
 }

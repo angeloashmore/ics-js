@@ -24,6 +24,7 @@ The following components are implenented:
 * `VCALENDAR`
 * `VEVENT`
 * `VALARM`
+* `VTODO`
 
 ### Add properties to a component
 
@@ -37,10 +38,11 @@ can be added according to the RFC 5545 spec.
 
 The following properties are implemented:
 
-* `DTEND` - Formats a Date object to spec.
-* `DTSTAMP` - Formats a Date object to spec.
-* `DTSTART` - Formats a Date object to spec.
-* `VERSION` - Formats a Number object to spec.
+* `DTEND` - Formats a Date to spec.
+* `DTSTAMP` - Formats a Date to spec.
+* `DTSTART` - Formats a Date to spec.
+* `VERSION` - Formats a Number to spec.
+* `CATEGORIES` - Formats an Array to spec.
 
 Other properties (e.g. `SUMMARY`, `LOCATION`) are stored as-is without transformations.
 

@@ -48,7 +48,7 @@ Other properties (e.g. `SUMMARY`, `LOCATION`) are stored as-is without transform
 ```js
 const event = new ICS.components.VEVENT();
 event.addProp(new ICS.properties.UID(1));
-event.addProp(new ICS.properties.DTSTAMP(new Date(Date.parse("2015-07-18 10:00:00"))));
+event.addProp(new ICS.properties.DTSTAMP(new Date("2015-07-18 10:00:00")));
 
 cal.addComponent(event);
 ```

@@ -10,8 +10,8 @@ export default class Component {
 
   static requiredProps = [];
 
-  static validProps = [];
-  static validComponents = [];
+  static validProps = {};
+  static validComponents = {};
 
   constructor() {
     this.prefix = `BEGIN:${this.constructor.componentName}`;

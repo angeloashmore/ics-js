@@ -42,4 +42,8 @@ export default class VTODO extends Component {
     "RESOURCES":    [],
     "RDATE":        []
   }
+
+  static validComponents = {
+    "VALARM": []
+  }
 }

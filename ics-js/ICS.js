@@ -20,7 +20,7 @@ export default class ICS {
     const blob = this.toBlob(string);
     const reader = new window.FileReader();
 
-    return Promise((resolve, reject) => {
+    return new Promise((resolve, reject) => {
       reader.readAsDataURL(blob);
       reader.onloadend = () => resolve(reader.result);
       reader.onerror = () => reject(reader.error);

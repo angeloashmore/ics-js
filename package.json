@@ -29,6 +29,7 @@
   },
   "dependencies": {
     "es6-error": "^1.0.0",
-    "format-date": "0.0.1"
+    "format-date": "0.0.1",
+    "simple-guid": "0.0.1"
   }
 }

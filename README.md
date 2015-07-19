@@ -13,44 +13,63 @@ Import the module:
 import ICS from "ics-js";
 ```
 
-Create an ICS instance:
+### Create a component
+
+The following components are implenented:
+
+* `VCALENDAR`
+* `VEVENT`
+
+To create a component:
 
 ```js
-const cal = new ICS();
+const cal = new ICS.components.VCALENDAR();
 ```
 
-Add an event:
+### Add properties to a component
+
+To add a property to a component:
 
 ```js
-let event = new ICS.Event();
-event.subject = "Apple WWDC 2015 Keynote";
-event.description = "Annual Worldwide Developers Conference held by Apple in San Francisco, California.";
-event.location = "Moscone Center West";
-event.start = new Date(Date.parse("08 Jul 2015 09:00:00 PST"));
-event.end = new Date(Date.parse("08 Jul 2015 11:30:00 PST"));
-
-cal.addEvent(event);
+cal.addProp(new ICS.properties.VERSION(2)); // Number(2) is converted to "2.0"
+cal.addProp(new ICS.properties.PRODID("XYZ Corp"));
 ```
 
-Get a list of events:
+Each component contains a list of property validations. Only valid properties
+can be added according to the RFC 5545 spec.
+
+The following properties are implemented:
+
+* `DTEND` - Formats a Date object to standard.
+* `DTSTAMP` - Formats a Date object to standard.
+* `DTSTART` - Formats a Date object to standard.
+* `VERSION` - Formats a Number object to "x.0"
+
+Other properties (e.g. `SUMMARY`, `LOCATION`) will be stored as-is.
+
+### Add a component
+
+To add a component to another component:
 
 ```js
-// Note: #events() is not mutable. Use #addEvent() to add events.
-cal.events();
+const event = new ICS.components.VEVENT();
+event.addProp(new ICS.properties.UID(1));
+event.addProp(new ICS.properties.DTSTAMP(new Date(Date.parse("2015-07-18 10:00:00"))));
+
+cal.addComponent(event);
 ```
 
-Get the ICS file:
+Each component contains a list of valid nested components. Only valid components
+can be added according to the RFC 5545 spec.
+
+### Generate ICS data
+
+To generate the ICS data:
 
 ```js
-cal.toString(); // Get a string.
-cal.toBlob(); // Get a Blob.
-cal.toBase64(); // Get a base64 string.
-```
-
-Clear all events:
-
-```js
-cal.reset();
+cal.toString(); // Returns a string
+ICS.toBlob(cal.toString()); // Returns a Blob
+ICS.toBase64(cal.toString()); // Returns a base64 string
 ```
 
 ## Acknowledgements

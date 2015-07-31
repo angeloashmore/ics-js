@@ -74,7 +74,7 @@ can be nested according to the RFC 5545 spec.
 ```js
 cal.toString(); // Returns a string
 cal.toBlob(); // Returns a Blob
-cal.toString(); // Returns a Promise with a base64 string as the resolved value
+cal.toBase64(); // Returns a Promise with a base64 string as the resolved value
 ```
 
 ## Acknowledgements

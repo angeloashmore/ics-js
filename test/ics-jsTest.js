@@ -1,23 +1,23 @@
 import assert from "assert";
 import ICS from "../ics-js/ICS";
 
-const cal = new ICS.components.VCALENDAR();
+const cal = new ICS.VCALENDAR();
 cal.addProp("VERSION", 2);
 cal.addProp("PRODID", "XYZ Corp");
 
-const event = new ICS.components.VEVENT();
+const event = new ICS.VEVENT();
 event.addProp("UID", "1");
 event.addProp("DTSTAMP", new Date("2015-07-18 10:00:00"));
 event.addProp("SUMMARY", "Birthdate");
 event.addProp("DTSTART", new Date("1991-03-07 07:00:00"));
 event.addProp("DTEND", new Date("1991-03-07 09:30:00"));
 
-const eventAlarm = new ICS.components.VALARM();
+const eventAlarm = new ICS.VALARM();
 eventAlarm.addProp("ACTION", "DISPLAY");
 eventAlarm.addProp("TRIGGER", "-PT12H");
 eventAlarm.addProp("DESCRIPTION", "Event reminder");
 
-const todo = new ICS.components.VTODO();
+const todo = new ICS.VTODO();
 todo.addProp("UID", "1");
 todo.addProp("DTSTAMP", new Date("2015-07-18 10:00:00"));
 todo.addProp("DUE", new Date("2015-07-19 10:00:00"));

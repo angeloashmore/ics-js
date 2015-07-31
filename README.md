@@ -16,7 +16,7 @@ import ICS from "ics-js";
 ### Create a component
 
 ```js
-const cal = new ICS.components.VCALENDAR();
+const cal = new ICS.VCALENDAR();
 ```
 
 The following components are implenented:
@@ -53,7 +53,7 @@ All other properties (e.g. `SUMMARY`, `LOCATION`) are stored as-is without trans
 ### Nest a component
 
 ```js
-const event = new ICS.components.VEVENT();
+const event = new ICS.VEVENT();
 event.addProp("UID");
 event.addProp("DTSTAMP", new Date("2015-07-18 10:00:00"));
 
@@ -67,8 +67,8 @@ can be nested according to the RFC 5545 spec.
 
 ```js
 cal.toString(); // Returns a string
-ICS.toBlob(cal.toString()); // Returns a Blob
-ICS.toBase64(cal.toString()); // Returns a base64 string
+cal.toBlob(); // Returns a Blob
+cal.toString(); // Returns a Promise with a base64 string as the resolved value
 ```
 
 ## Acknowledgements

@@ -1,6 +1,6 @@
 import assert from "assert";
 import ICS from "../ics-js/ICS";
-import * as properties from "../ics-js/properties";
+import { VERSION } from "../ics-js/properties";
 import {
   InvalidComponentError,
   InvalidProvidedComponentError,
@@ -8,9 +8,10 @@ import {
   ValidationError
 } from "../ics-js/errors";
 
-const component = new ICS.components.VCALENDAR();
-const prop = new properties.VERSION(2);
-const component_2 = new ICS.components.VEVENT();
+console.log(ICS)
+const component = new ICS.VCALENDAR();
+const prop = new VERSION(2);
+const component_2 = new ICS.VEVENT();
 
 describe("Component", function() {
   beforeEach(function() {
@@ -126,7 +127,7 @@ describe("Component", function() {
     });
 
     it("should throw an InvalidProvidedComponentError if passed an invalid (for the component) component", function() {
-      const invalid_component = new ICS.components.VCALENDAR();
+      const invalid_component = new ICS.VCALENDAR();
       assert.throws(() => component.addComponent(invalid_component), InvalidProvidedComponentError);
     });
   });

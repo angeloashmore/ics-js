@@ -4,9 +4,11 @@ import * as components from "./components";
 
 export default class ICS {
   static Property = Property;
-
   static Component = Component;
-  static components = components;
 
   static MIME_TYPE = "text/calendar";
+}
+
+for (let componentName in components) {
+  ICS[componentName] = components[componentName];
 }

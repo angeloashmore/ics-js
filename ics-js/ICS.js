@@ -1,11 +1,9 @@
 import Property from "./Property";
-import properties from "./properties";
 import Component from "./Component";
-import components from "./components";
+import * as components from "./components";
 
 export default class ICS {
   static Property = Property;
-  static properties = properties;
 
   static Component = Component;
   static components = components;

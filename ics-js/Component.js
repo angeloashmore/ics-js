@@ -1,4 +1,4 @@
-import Property from "./Property";
+import * as properties from "./properties";
 import {
   InvalidComponentError,
   InvalidProvidedComponentError,
@@ -29,16 +29,16 @@ export default class Component {
     return Object.freeze(this.props().map(prop => prop.constructor.propName));
   }
 
-  addProp(prop) {
+  addProp(name, value) {
     const { validProps } = this.constructor;
-    const { propName } = prop.constructor;
+    if (!validProps[name]) throw new InvalidProvidedPropError();
 
-    if (!(prop instanceof Property)) throw new TypeError("Expected `prop` to be an instance of Property.");
-    if (!validProps[propName]) throw new InvalidProvidedPropError();
-
-    validProps[propName].forEach(validator => validator(this, prop));
+    const propClass = properties[name] || properties._default(name);
+    const prop = new propClass(value);
+    validProps[name].forEach(validator => validator(this, prop));
 
     this._props.push(prop);
+
     return prop;
   }
 

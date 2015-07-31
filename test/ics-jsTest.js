@@ -2,27 +2,27 @@ import assert from "assert";
 import ICS from "../ics-js/ICS";
 
 const cal = new ICS.components.VCALENDAR();
-cal.addProp(new ICS.properties.VERSION(2));
-cal.addProp(new ICS.properties.PRODID("XYZ Corp"));
+cal.addProp("VERSION", 2);
+cal.addProp("PRODID", "XYZ Corp");
 
 const event = new ICS.components.VEVENT();
-event.addProp(new ICS.properties.UID("1"));
-event.addProp(new ICS.properties.DTSTAMP(new Date("2015-07-18 10:00:00")));
-event.addProp(new ICS.properties.SUMMARY("Birthdate"));
-event.addProp(new ICS.properties.DTSTART(new Date("1991-03-07 07:00:00")));
-event.addProp(new ICS.properties.DTEND(new Date("1991-03-07 09:30:00")));
+event.addProp("UID", "1");
+event.addProp("DTSTAMP", new Date("2015-07-18 10:00:00"));
+event.addProp("SUMMARY", "Birthdate");
+event.addProp("DTSTART", new Date("1991-03-07 07:00:00"));
+event.addProp("DTEND", new Date("1991-03-07 09:30:00"));
 
 const eventAlarm = new ICS.components.VALARM();
-eventAlarm.addProp(new ICS.properties.ACTION("DISPLAY"));
-eventAlarm.addProp(new ICS.properties.TRIGGER("-PT12H"));
-eventAlarm.addProp(new ICS.properties.DESCRIPTION("Event reminder"));
+eventAlarm.addProp("ACTION", "DISPLAY");
+eventAlarm.addProp("TRIGGER", "-PT12H");
+eventAlarm.addProp("DESCRIPTION", "Event reminder");
 
 const todo = new ICS.components.VTODO();
-todo.addProp(new ICS.properties.UID("1"));
-todo.addProp(new ICS.properties.DTSTAMP(new Date("2015-07-18 10:00:00")));
-todo.addProp(new ICS.properties.DUE(new Date("2015-07-19 10:00:00")));
-todo.addProp(new ICS.properties.SUMMARY("To Do"));
-todo.addProp(new ICS.properties.CATEGORIES(["WORK", "FAMILY"]));
+todo.addProp("UID", "1");
+todo.addProp("DTSTAMP", new Date("2015-07-18 10:00:00"));
+todo.addProp("DUE", new Date("2015-07-19 10:00:00"));
+todo.addProp("SUMMARY", "To Do");
+todo.addProp("CATEGORIES", ["WORK", "FAMILY"]);
 
 event.addComponent(eventAlarm);
 

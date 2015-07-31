@@ -28,10 +28,6 @@ describe("Property", function() {
       assert.equal(prop.value != undefined, true);
       assert.equal(prop.skipTransformer != undefined, true);
     });
-
-    it("should throw a TypeError if `value` is undefined", function() {
-      assert.throws(() => new ICS.Property(), TypeError);
-    });
   });
 
   describe("#shortTransformer()", function() {

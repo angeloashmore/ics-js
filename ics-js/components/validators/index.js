@@ -1,9 +1,3 @@
-import required from "./required";
-import singleton from "./singleton";
-import unique from "./unique";
-
-export default {
-  required,
-  singleton,
-  unique
-}
+export required from "./required";
+export singleton from "./singleton";
+export unique from "./unique";

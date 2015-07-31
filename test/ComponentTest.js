@@ -1,5 +1,6 @@
 import assert from "assert";
 import ICS from "../ics-js/ICS";
+import * as properties from "../ics-js/properties";
 import {
   InvalidComponentError,
   InvalidProvidedComponentError,
@@ -8,7 +9,7 @@ import {
 } from "../ics-js/errors";
 
 const component = new ICS.components.VCALENDAR();
-const prop = new ICS.properties.VERSION(2);
+const prop = new properties.VERSION(2);
 const component_2 = new ICS.components.VEVENT();
 
 describe("Component", function() {
@@ -43,7 +44,7 @@ describe("Component", function() {
 
     describe("with some props", function() {
       it("should return an array with added Property objects", function() {
-        component.addProp(prop);
+        component.addProp("VERSION", 2);
         assert.deepEqual(component.props(), [prop]);
       });
     });
@@ -58,7 +59,7 @@ describe("Component", function() {
 
     describe("with some props", function() {
       it("should return an array with added Property objects' names", function() {
-        component.addProp(prop);
+        component.addProp("VERSION", 2);
         assert.deepEqual(component.propNames(), [prop.constructor.propName]);
       });
     });
@@ -66,22 +67,17 @@ describe("Component", function() {
 
   describe("#addProp()", function() {
     it("should add a Property", function() {
-      component.addProp(prop);
+      component.addProp("VERSION", 2)
       assert.deepEqual(component._props, [prop]);
     });
 
-    it("should throw a TypeError if not passed an instance of Property", function() {
-      assert.throws(() => component.addProp("prop"), TypeError);
-    });
-
     it("should throw an InvalidProvidedPropError if passed an invalid (for the component) prop", function() {
-      const invalid_prop = new ICS.properties.DTSTART(new Date());
-      assert.throws(() => component.addProp(invalid_prop), InvalidProvidedPropError);
+      assert.throws(() => component.addProp("DTSTART", new Date()), InvalidProvidedPropError);
     });
 
     it("should throw an Error if passed a prop against its requirement validations", function() {
-      component.addProp(prop);
-      assert.throws(() => component.addProp(prop), ValidationError);
+      component.addProp("VERSION", 2);
+      assert.throws(() => component.addProp("VERSION", 2), ValidationError);
     });
   });
 
@@ -137,7 +133,7 @@ describe("Component", function() {
 
   describe("#reset()", function() {
     it("should remove all props and components", function() {
-      component.addProp(prop);
+      component.addProp("VERSION", 2);
       component.addComponent(component_2);
       component.reset();
       assert.deepEqual(component._props, []);
@@ -147,21 +143,21 @@ describe("Component", function() {
 
   describe("#validateRequired()", function() {
     it("should throw an InvalidComponentError if missing required props", function() {
-      component.addProp(prop);
+      component.addProp("VERSION", 2);
       assert.throws(() => component.validateRequired(), InvalidComponentError);
     });
 
     it("should return true if all required props are present", function() {
-      component.addProp(prop);
-      component.addProp(new ICS.properties.PRODID("XYZ Corp"));
+      component.addProp("VERSION", 2);
+      component.addProp("PRODID", "XYZ Corp");
       assert.equal(component.validateRequired(), true);
     });
   });
 
   describe("#toString()", function() {
     beforeEach(function() {
-      component.addProp(prop);
-      component.addProp(new ICS.properties.PRODID("XYZ Corp"));
+      component.addProp("VERSION", 2);
+      component.addProp("PRODID", "XYZ Corp");
     });
 
     it("should return a string", function() {

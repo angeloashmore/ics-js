@@ -1,7 +1,4 @@
-import InvalidProvidedComponentError from "./InvalidProvidedComponentError";
-import InvalidProvidedPropError from "./InvalidProvidedPropError";
-
-export default {
-  InvalidProvidedComponentError,
-  InvalidProvidedPropError
-}
+export InvalidComponentError from "./InvalidComponentError";
+export InvalidProvidedComponentError from "./InvalidProvidedComponentError";
+export InvalidProvidedPropError from "./InvalidProvidedPropError";
+export ValidationError from "./ValidationError";

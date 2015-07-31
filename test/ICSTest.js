@@ -3,7 +3,7 @@ import ICS from "../ics-js/ICS";
 import Property from "../ics-js/Property";
 import properties from "../ics-js/properties";
 import Component from "../ics-js/Component";
-import components from "../ics-js/components";
+import * as components from "../ics-js/components";
 
 const string = "BEGIN:VCALENDAR\nEND:VCALENDAR";
 
@@ -12,10 +12,6 @@ describe("ICS", function() {
     it("should return the Property class", function() {
       assert.equal(ICS.Property, Property);
     });
-
-    it("should return an array of Properties", function() {
-      assert.equal(ICS.properties, properties);
-    })
   });
 
   describe("Component", function() {

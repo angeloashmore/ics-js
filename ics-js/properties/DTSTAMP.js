@@ -1,4 +1,5 @@
 import formatDate from "format-date";
+import ICS from "../ICS";
 import Property from "../Property";
 
 export default class DTSTAMP extends Property {
@@ -9,9 +10,6 @@ export default class DTSTAMP extends Property {
   }
 
   transformer() {
-    const format = "{year}{month}{day}T{hours}{minutes}{seconds}";
-    const date = new Date(Date.parse(this.value));
-
-    return formatDate(format, date);
+    return formatDate(ICS.DateTimeFormat, new Date(this.value));
   }
 }

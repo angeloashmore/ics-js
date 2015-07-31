@@ -38,15 +38,15 @@ can be added according to the RFC 5545 spec.
 
 The following properties are implemented:
 
-| Name  | Input | Output |
-| ------------- | ------------- |
-| `CATEGORIES` | `Array<String>` | Array items separated by `,` |
-| `DTEND` | `Date` | Formatted date to spec |
-| `DTSTAMP` | `Date` | Formatted date to spec |
-| `DTSTART` | `Date` | Formatted date to spec |
-| `DUE` | `Date` | Formatted date to spec |
-| `UID` | `String` or none | If no value is provided, generates a random GUID |
-| `VERSION` | `Number` | Float with 1 decimal to spec |
+| Name         | Input            | Output                                           |
+| ------------ | ---------------- | ------------------------------------------------ |
+| `CATEGORIES` | `Array<String>`  | Array items separated by `,`                     |
+| `DTEND`      | `Date`           | Formatted date to spec                           |
+| `DTSTAMP`    | `Date`           | Formatted date to spec                           |
+| `DTSTART`    | `Date`           | Formatted date to spec                           |
+| `DUE`        | `Date`           | Formatted date to spec                           |
+| `UID`        | `String` or none | If no input is provided, generates a random GUID |
+| `VERSION`    | `Number`         | Float with 1 decimal to spec                     |
 
 All other properties (e.g. `SUMMARY`, `LOCATION`) are stored as-is without transformations.
 

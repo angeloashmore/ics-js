@@ -1,3 +1,4 @@
+import ICS from "./ICS";
 import * as properties from "./properties";
 import {
   InvalidComponentError,
@@ -89,6 +90,22 @@ export default class Component {
       ...components,
       this.suffix
     ].join(this.constructor.separator);
+  }
+
+  toBlob() {
+    return new Blob([this.toString()], { type: ICS.MIME_TYPE });
+  }
+
+  toBase64() {
+    const blob = this.toBlob();
+    const reader = new window.FileReader();
+
+    return new Promise((resolve, reject) => {
+      reader.readAsDataURL(blob);
+      reader.onloadend = () => resolve(reader.result);
+      reader.onerror = () => reject(reader.error);
+      reader.onabort = () => reject();
+    });
   }
 
   static _intersect(a, b) {

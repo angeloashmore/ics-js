@@ -29,17 +29,4 @@ describe("ICS", function() {
       assert.equal(ICS.MIME_TYPE, "text/calendar");
     });
   });
-
-  describe("#toBlob()", function() {
-    it("should return an instance of Blob", function() {
-      assert.equal(ICS.toBlob(string) instanceof Blob, true);
-    });
-  });
-
-  describe("toBase64()", function() {
-    it("should return a string starting with 'data:text/calendar,'", function() {
-      assert.equal(typeof ICS.toBase64(string), "string");
-      assert.equal(ICS.toBase64(string).startsWith("data:text/calendar,"), true);
-    });
-  });
 });

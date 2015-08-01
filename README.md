@@ -34,6 +34,12 @@ The following components are implenented:
 ### Add properties to a component
 
 ```js
+// Component#addProp(name, value, props)
+//
+// name: Name of the property
+// value: Value of the property
+// props: Object with properties for the property
+
 cal.addProp("VERSION", 2) // Number(2) is converted to "2.0"
 cal.addProp("PRODID", "XYZ Corp");
 ```
@@ -66,7 +72,7 @@ All other properties (e.g. `SUMMARY`, `LOCATION`) are stored as-is without trans
 ```js
 const event = new ICS.VEVENT();
 event.addProp("UID");
-event.addProp("DTSTAMP", new Date("2015-07-18 10:00:00"));
+event.addProp("DTSTAMP", new Date("2015-07-18 10:00:00"), { "VALUE": "DATE-TIME" });
 
 cal.addComponent(event);
 ```

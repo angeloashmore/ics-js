@@ -7,7 +7,7 @@ cal.addProp("PRODID", "XYZ Corp");
 
 const event = new ICS.VEVENT();
 event.addProp("UID", "1");
-event.addProp("DTSTAMP", new Date("2015-07-18 10:00:00"));
+event.addProp("DTSTAMP", new Date("2015-07-18 10:00:00"), { "VALUE": "DATE" });
 event.addProp("SUMMARY", "Birthdate");
 event.addProp("DTSTART", new Date("1991-03-07 07:00:00"));
 event.addProp("DTEND", new Date("1991-03-07 09:30:00"));
@@ -34,7 +34,7 @@ VERSION:2.0\n\
 PRODID:XYZ Corp\n\
 BEGIN:VEVENT\n\
 UID:1\n\
-DTSTAMP:20150718T100000\n\
+DTSTAMP;VALUE=DATE:20150718T100000\n\
 SUMMARY:Birthdate\n\
 DTSTART:19910307T070000\n\
 DTEND:19910307T093000\n\

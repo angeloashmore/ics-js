@@ -1,6 +1,11 @@
 # ics-js
 Create ICS files in ES6 JavaScript.
 
+## Status
+
+[![npm version](https://badge.fury.io/js/ics-js.svg)](http://badge.fury.io/js/ics-js)
+[![Build Status](https://secure.travis-ci.org/angeloashmore/ics-js.svg?branch=master)](http://travis-ci.org/angeloashmore/ics-js?branch=master)
+
 ## Installation
 
 `npm install ics-js`

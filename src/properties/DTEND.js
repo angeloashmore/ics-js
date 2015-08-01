@@ -1,5 +1,5 @@
-import DTSTAMP from "./DTSTAMP";
+import DTSTAMP from './DTSTAMP';
 
 export default class DTEND extends DTSTAMP {
-  static propName = "DTEND";
+  static propName = 'DTEND';
 }

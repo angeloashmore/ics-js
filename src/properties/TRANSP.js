@@ -1,13 +1,13 @@
-import Property from "../Property";
+import Property from '../Property';
 
 export default class TRANSP extends Property {
-  static propName = "TRANSP";
+  static propName = 'TRANSP';
 
   shortTransformer() {
-    return typeof this.value === "string";
+    return typeof this.value === 'string';
   }
 
   transformer() {
-    return !!this.value ? "TRANSPARENT" : "OPAQUE";
+    return !!this.value ? 'TRANSPARENT' : 'OPAQUE';
   }
 }

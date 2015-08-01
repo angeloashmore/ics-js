@@ -15,7 +15,7 @@ Create ICS files in ES6.
 Import the module:
 
 ```js
-import ICS from "ics-js";
+import ICS from 'ics-js';
 ```
 
 ### Create a component
@@ -40,8 +40,8 @@ The following components are implenented:
 // value: Value of the property
 // props: Object with properties for the property
 
-cal.addProp("VERSION", 2) // Number(2) is converted to "2.0"
-cal.addProp("PRODID", "XYZ Corp");
+cal.addProp('VERSION', 2) // Number(2) is converted to '2.0'
+cal.addProp('PRODID', 'XYZ Corp');
 ```
 
 Each component contains a list of property validations. Only valid properties
@@ -71,8 +71,8 @@ All other properties (e.g. `SUMMARY`, `LOCATION`) are stored as-is without trans
 
 ```js
 const event = new ICS.VEVENT();
-event.addProp("UID");
-event.addProp("DTSTAMP", new Date("2015-07-18 10:00:00"), { "VALUE": "DATE-TIME" });
+event.addProp('UID');
+event.addProp('DTSTAMP', new Date('2015-07-18 10:00:00'), { VALUE: 'DATE-TIME' });
 
 cal.addComponent(event);
 ```

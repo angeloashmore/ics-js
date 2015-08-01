@@ -1,13 +1,13 @@
-import ICS from "./ICS";
-import * as properties from "./properties";
+import ICS from './ICS';
+import * as properties from './properties';
 import {
   InvalidComponentError,
   InvalidProvidedComponentError,
   InvalidProvidedPropError
-} from "./errors";
+} from './errors';
 
 export default class Component {
-  static separator = "\n";
+  static separator = '\n';
 
   static requiredProps = [];
 
@@ -34,8 +34,8 @@ export default class Component {
     const { validProps } = this.constructor;
     if (!validProps[name]) throw new InvalidProvidedPropError();
 
-    const propClass = properties[name] || properties._default(name);
-    const prop = new propClass(value, props);
+    const PropClass = properties[name] || properties._default(name);
+    const prop = new PropClass(value, props);
     validProps[name].forEach(validator => validator(this, prop));
 
     this._props.push(prop);
@@ -55,7 +55,7 @@ export default class Component {
     const { validComponents } = this.constructor;
     const { componentName } = component.constructor;
 
-    if (!(component instanceof Component)) throw new TypeError("Expected `component` to be an instance of Component.");
+    if (!(component instanceof Component)) throw new TypeError('Expected `component` to be an instance of Component.');
     if (!validComponents[componentName]) throw new InvalidProvidedComponentError();
 
     validComponents[componentName].forEach(validator => validator(this, component));
@@ -88,7 +88,7 @@ export default class Component {
       this.prefix,
       ...props,
       ...components,
-      this.suffix
+      this.suffix,
     ].join(this.constructor.separator);
   }
 

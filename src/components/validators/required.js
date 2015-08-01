@@ -1,10 +1,11 @@
-import Property from "../../Property";
-import Component from "../../Component";
-import { ValidationError } from "../../errors";
+import Property from '../../Property';
+import Component from '../../Component';
+import { ValidationError } from '../../errors';
 
 export default function required() {
   return (component, subject) => {
-    let subjectName, names;
+    let subjectName;
+    let names;
 
     if (subject instanceof Property) {
       subjectName = subject.constructor.propName;
@@ -15,5 +16,5 @@ export default function required() {
     }
 
     if (!names.includes(subjectName)) throw new ValidationError();
-  }
+  };
 }

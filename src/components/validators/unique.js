@@ -1,10 +1,11 @@
-import Property from "../../Property";
-import Component from "../../Component";
-import { ValidationError } from "../../errors";
+import Property from '../../Property';
+import Component from '../../Component';
+import { ValidationError } from '../../errors';
 
 export default function unique(uniqueNames) {
   return (component, subject) => {
-    let subjectName, names;
+    let subjectName;
+    let names;
 
     if (subject instanceof Property) {
       subjectName = subject.constructor.propName;
@@ -20,5 +21,5 @@ export default function unique(uniqueNames) {
     return difference > 1 ? false : true;
 
     if (difference > 1) throw new ValidationError();
-  }
+  };
 }

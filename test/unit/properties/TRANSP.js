@@ -1,15 +1,15 @@
-import assert from "assert";
-import propertyTest from "../../helpers/propertyTest";
-import { TRANSP } from "../../../src/properties";
+import assert from 'assert';
+import propertyTest from '../../helpers/propertyTest';
+import { TRANSP } from '../../../src/properties';
 
-propertyTest("TRANSP", {
+propertyTest('TRANSP', {
   transformableValue: true,
-  transformedValue: "TRANSPARENT"
+  transformedValue: 'TRANSPARENT',
 });
 
-describe("UID", function() {
-  it("should return OPAQUE if false", function() {
+describe('UID', function() {
+  it('should return OPAQUE if false', function() {
     const prop = new TRANSP(false);
-    assert.equal(prop.transformedValue(), "OPAQUE");
+    assert.equal(prop.transformedValue(), 'OPAQUE');
   });
 });

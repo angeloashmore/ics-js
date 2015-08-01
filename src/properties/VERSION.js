@@ -1,7 +1,7 @@
-import Property from "../Property";
+import Property from '../Property';
 
 export default class VERSION extends Property {
-  static propName = "VERSION";
+  static propName = 'VERSION';
 
   shortTransformer() {
     return /[0-9].[0-9]/.test(this.value);

@@ -1,6 +1,6 @@
-import propertyTest from "../../helpers/propertyTest";
+import propertyTest from '../../helpers/propertyTest';
 
-propertyTest("VERSION", {
+propertyTest('VERSION', {
   transformableValue: 2,
-  transformedValue: "2.0"
+  transformedValue: '2.0',
 });

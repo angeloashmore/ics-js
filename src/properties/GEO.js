@@ -1,13 +1,13 @@
-import Property from "../Property";
+import Property from '../Property';
 
 export default class GEO extends Property {
-  static propName = "GEO";
+  static propName = 'GEO';
 
   shortTransformer() {
-    return typeof this.value === "string";
+    return typeof this.value === 'string';
   }
 
   transformer() {
-    return this.value.join(";");
+    return this.value.join(';');
   }
 }

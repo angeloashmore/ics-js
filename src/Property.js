@@ -1,6 +1,6 @@
 export default class Property {
   static keyRegex = /^[A-Z]([A-Z]|-)*[A-Z]$/;
-  static propName = "Property";
+  static propName = 'Property';
 
   constructor(value, props, skipTransformer = false) {
     this.value = value;
@@ -24,11 +24,11 @@ export default class Property {
   transformedProps() {
     const props = [];
     for (let key in this.props) props.push(`${key}=${this.props[key]}`);
-    return props.join(";");
+    return props.join(';');
   }
 
   toString() {
-    const key = this.constructor.propName + (!!this.props ? ";" + this.transformedProps() : "");
+    const key = this.constructor.propName + (!!this.props ? ';' + this.transformedProps() : '');
     const value = this.transformedValue();
     return `${key}:${value}`;
   }

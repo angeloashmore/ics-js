@@ -1,8 +1,8 @@
-import guid from "simple-guid";
-import Property from "../Property";
+import guid from 'simple-guid';
+import Property from '../Property';
 
 export default class UID extends Property {
-  static propName = "UID";
+  static propName = 'UID';
 
   shortTransformer() {
     return !!this.value;

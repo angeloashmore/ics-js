@@ -1,12 +1,12 @@
-import formatDate from "format-date";
-import ICS from "../ICS";
-import Property from "../Property";
+import formatDate from 'format-date';
+import ICS from '../ICS';
+import Property from '../Property';
 
 export default class EXDATE extends Property {
-  static propName = "EXDATE";
+  static propName = 'EXDATE';
 
   shortTransformer() {
-    return typeof this.value === "string";
+    return typeof this.value === 'string';
   }
 
   transformer() {

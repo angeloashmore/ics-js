@@ -5,6 +5,11 @@ const validName = "DSTART";
 const invalidName = "-DStart-";
 const value = "value";
 const prop = new ICS.Property(value);
+const propProps = {
+  "KEY1": "VALUE1",
+  "KEY2": "VALUE2"
+};
+const propWithProps = new ICS.Property(value, propProps);
 
 describe("Property", function() {
   describe("::keyRegex", function() {
@@ -45,6 +50,24 @@ describe("Property", function() {
   describe("#transformedValue()", function() {
     it("should return value untouched", function() {
       assert.equal(prop.transformer(), value);
+    });
+  });
+
+  describe("#transformedProps()", function() {
+    it("should return a string", function() {
+      assert.equal(typeof prop.transformedProps(), "string");
+    });
+
+    describe("with no props", function() {
+      it("should return an empty string", function() {
+        assert.equal(prop.transformedProps(), "");
+      })
+    });
+
+    describe("with props", function() {
+      it("should return a semicolon separated string", function() {
+        assert.equal(propWithProps.transformedProps(), "KEY1=VALUE1;KEY2=VALUE2");
+      });
     });
   });
 

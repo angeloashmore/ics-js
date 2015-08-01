@@ -4,7 +4,7 @@
   "description": "Create ICS files in ES6",
   "main": "ics-js/ICS.js",
   "scripts": {
-    "test": "mocha --compilers js:babel/register",
+    "test": "mocha test/unit test/integration",
     "build": "webpack"
   },
   "repository": {

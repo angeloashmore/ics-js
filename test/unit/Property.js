@@ -1,5 +1,5 @@
 import assert from "assert";
-import ICS from "../ics-js/ICS";
+import ICS from "../../ics-js/ICS";
 
 const validName = "DSTART";
 const invalidName = "-DStart-";

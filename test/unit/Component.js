@@ -1,12 +1,12 @@
 import assert from "assert";
-import ICS from "../ics-js/ICS";
-import { VERSION } from "../ics-js/properties";
+import ICS from "../../ics-js/ICS";
+import { VERSION } from "../../ics-js/properties";
 import {
   InvalidComponentError,
   InvalidProvidedComponentError,
   InvalidProvidedPropError,
   ValidationError
-} from "../ics-js/errors";
+} from "../../ics-js/errors";
 
 console.log(ICS)
 const component = new ICS.VCALENDAR();
@@ -175,30 +175,30 @@ describe("Component", function() {
     });
   });
 
-  // Tests involving Blob commented out since Node/io.js does not support it.
-  //
-  // describe("#toBlob()", function() {
-  //   beforeEach(function() {
-  //     component.addProp("VERSION", 2);
-  //     component.addProp("PRODID", "XYZ Corp");
-  //   });
-  //
-  //   it("should return an instance of Blob", function() {
-  //     assert.equal(component.toBlob() instanceof Blob, true);
-  //   });
-  // });
-  //
-  // describe("toBase64()", function() {
-  //   beforeEach(function() {
-  //     component.addProp("VERSION", 2);
-  //     component.addProp("PRODID", "XYZ Corp");
-  //   });
-  //
-  //   it("should return a string starting with 'data:text/calendar,'", function() {
-  //     const base64 = component.toBase64();
-  //
-  //     assert.equal(typeof base64, "string");
-  //     assert.equal(base64.startsWith("data:text/calendar,"), true);
-  //   });
-  // });
+  // Tests involving Blob skipped since Node/io.js does not support it.
+
+  describe.skip("#toBlob()", function() {
+    beforeEach(function() {
+      component.addProp("VERSION", 2);
+      component.addProp("PRODID", "XYZ Corp");
+    });
+
+    it("should return an instance of Blob", function() {
+      assert.equal(component.toBlob() instanceof Blob, true);
+    });
+  });
+
+  describe.skip("toBase64()", function() {
+    beforeEach(function() {
+      component.addProp("VERSION", 2);
+      component.addProp("PRODID", "XYZ Corp");
+    });
+
+    it("should return a string starting with 'data:text/calendar,'", function() {
+      const base64 = component.toBase64();
+
+      assert.equal(typeof base64, "string");
+      assert.equal(base64.startsWith("data:text/calendar,"), true);
+    });
+  });
 });

@@ -1,7 +1,7 @@
 import assert from "assert";
-import ICS from "../ics-js/ICS";
-import Property from "../ics-js/Property";
-import Component from "../ics-js/Component";
+import ICS from "../../ics-js/ICS";
+import Property from "../../ics-js/Property";
+import Component from "../../ics-js/Component";
 
 const string = "BEGIN:VCALENDAR\nEND:VCALENDAR";
 

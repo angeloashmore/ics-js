@@ -8,7 +8,6 @@ import {
   ValidationError
 } from "../../ics-js/errors";
 
-console.log(ICS)
 const component = new ICS.VCALENDAR();
 const prop = new VERSION(2);
 const component_2 = new ICS.VEVENT();

@@ -175,28 +175,30 @@ describe("Component", function() {
     });
   });
 
-  describe("#toBlob()", function() {
-    beforeEach(function() {
-      component.addProp("VERSION", 2);
-      component.addProp("PRODID", "XYZ Corp");
-    });
-
-    it("should return an instance of Blob", function() {
-      assert.equal(component.toBlob() instanceof Blob, true);
-    });
-  });
-
-  describe("toBase64()", function() {
-    beforeEach(function() {
-      component.addProp("VERSION", 2);
-      component.addProp("PRODID", "XYZ Corp");
-    });
-
-    it("should return a string starting with 'data:text/calendar,'", function() {
-      const base64 = component.toBase64();
-
-      assert.equal(typeof base64, "string");
-      assert.equal(base64.startsWith("data:text/calendar,"), true);
-    });
-  });
+  // Tests involving Blob commented out since Node/io.js does not support it.
+  //
+  // describe("#toBlob()", function() {
+  //   beforeEach(function() {
+  //     component.addProp("VERSION", 2);
+  //     component.addProp("PRODID", "XYZ Corp");
+  //   });
+  //
+  //   it("should return an instance of Blob", function() {
+  //     assert.equal(component.toBlob() instanceof Blob, true);
+  //   });
+  // });
+  //
+  // describe("toBase64()", function() {
+  //   beforeEach(function() {
+  //     component.addProp("VERSION", 2);
+  //     component.addProp("PRODID", "XYZ Corp");
+  //   });
+  //
+  //   it("should return a string starting with 'data:text/calendar,'", function() {
+  //     const base64 = component.toBase64();
+  //
+  //     assert.equal(typeof base64, "string");
+  //     assert.equal(base64.startsWith("data:text/calendar,"), true);
+  //   });
+  // });
 });

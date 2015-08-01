@@ -9,7 +9,7 @@ export default function(name, opts) {
     const transformedProp = new propertyClass(transformableValue);
     const shortedProp = new propertyClass(transformedValue);
 
-    describe("transformedValue()", function() {
+    describe("#transformedValue()", function() {
       it("should transform a transformable value", function() {
         assert.equal(transformedProp.transformedValue(), transformedValue);
       });

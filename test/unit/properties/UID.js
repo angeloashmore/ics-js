@@ -1,6 +1,6 @@
 import assert from "assert";
 import propertyTest from "../../helpers/propertyTest";
-import { UID } from "../../../ics-js/properties";
+import { UID } from "../../../src/properties";
 
 propertyTest("UID", {
   transformableValue: "123",

@@ -1,5 +1,5 @@
 import assert from "assert";
-import ICS from "../../ics-js/ICS";
+import ICS from "../../src/ICS";
 
 const cal = new ICS.VCALENDAR();
 cal.addProp("VERSION", 2);

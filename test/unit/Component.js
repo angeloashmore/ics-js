@@ -1,12 +1,12 @@
 import assert from "assert";
-import ICS from "../../ics-js/ICS";
-import { VERSION } from "../../ics-js/properties";
+import ICS from "../../src/ICS";
+import { VERSION } from "../../src/properties";
 import {
   InvalidComponentError,
   InvalidProvidedComponentError,
   InvalidProvidedPropError,
   ValidationError
-} from "../../ics-js/errors";
+} from "../../src/errors";
 
 const component = new ICS.VCALENDAR();
 const prop = new VERSION(2);

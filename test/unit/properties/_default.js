@@ -1,6 +1,6 @@
 import assert from "assert";
-import Property from "../../../ics-js/Property";
-import { _default } from "../../../ics-js/properties";
+import Property from "../../../src/Property";
+import { _default } from "../../../src/properties";
 
 describe("_default", function() {
   const name = "NAME";

@@ -1,6 +1,6 @@
 import assert from "assert";
 import propertyTest from "../../helpers/propertyTest";
-import { TRANSP } from "../../../ics-js/properties";
+import { TRANSP } from "../../../src/properties";
 
 propertyTest("TRANSP", {
   transformableValue: true,

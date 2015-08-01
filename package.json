@@ -2,7 +2,7 @@
   "name": "ics-js",
   "version": "0.8.1",
   "description": "Create ICS files in ES6",
-  "main": "ics-js/ICS.js",
+  "main": "src/ICS.js",
   "scripts": {
     "test": "mocha",
     "build": "webpack"

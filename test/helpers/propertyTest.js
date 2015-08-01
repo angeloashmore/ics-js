@@ -1,5 +1,5 @@
 import assert from "assert";
-import * as properties from "../../ics-js/properties";
+import * as properties from "../../src/properties";
 
 export default function(name, opts) {
   describe(name, function() {

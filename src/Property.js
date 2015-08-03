@@ -4,7 +4,7 @@ export default class Property {
 
   constructor(value, props, skipTransformer = false) {
     this.value = value;
-    this.props = props;
+    this.props = props || {};
     this.skipTransformer = skipTransformer;
   }
 
@@ -28,7 +28,8 @@ export default class Property {
   }
 
   toString() {
-    const key = this.constructor.propName + (!!this.props ? ';' + this.transformedProps() : '');
+    const hasProps = Object.keys(this.props).length > 0;
+    const key = this.constructor.propName + (hasProps ? ';' + this.transformedProps() : '');
     const value = this.transformedValue();
     return `${key}:${value}`;
   }

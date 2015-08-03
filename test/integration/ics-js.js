@@ -7,9 +7,9 @@ cal.addProp('PRODID', 'XYZ Corp');
 
 const event = new ICS.VEVENT();
 event.addProp('UID', '1');
-event.addProp('DTSTAMP', new Date('2015-07-18 10:00:00'), { VALUE: 'DATE' });
+event.addProp('DTSTAMP', new Date('2015-07-18'), { VALUE: 'DATE' });
 event.addProp('SUMMARY', 'Birthdate');
-event.addProp('DTSTART', new Date('1991-03-07 07:00:00'));
+event.addProp('DTSTART', new Date('1991-03-07 07:00:00'), { VALUE: 'DATE-TIME' });
 event.addProp('DTEND', new Date('1991-03-07 09:30:00'));
 
 const eventAlarm = new ICS.VALARM();
@@ -34,9 +34,9 @@ const icsString = 'BEGIN:VCALENDAR\n' +
                   'PRODID:XYZ Corp\n' +
                   'BEGIN:VEVENT\n' +
                   'UID:1\n' +
-                  'DTSTAMP;VALUE=DATE:20150718T100000\n' +
+                  'DTSTAMP;VALUE=DATE:20150718\n' +
                   'SUMMARY:Birthdate\n' +
-                  'DTSTART:19910307T070000\n' +
+                  'DTSTART;VALUE=DATE-TIME:19910307T070000\n' +
                   'DTEND:19910307T093000\n' +
                   'BEGIN:VALARM\n' +
                   'ACTION:DISPLAY\n' +

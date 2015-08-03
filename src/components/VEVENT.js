@@ -19,7 +19,7 @@ export default class VEVENT extends Component {
     LOCATION:          [singleton()],
     ORGANIZER:         [singleton()],
     PRIORITY:          [singleton()],
-    SEQ:               [singleton()],
+    SEQUENCE:          [singleton()],
     STATUS:            [singleton()],
     SUMMARY:           [singleton()],
     TRANSP:            [singleton()],

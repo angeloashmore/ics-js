@@ -22,7 +22,7 @@ export default class VTODO extends Component {
     PERCENT:           [singleton()],
     PRIORITY:          [singleton()],
     'RECURRENCE-ID':   [singleton()],
-    SEQ:               [singleton()],
+    SEQUENCE:          [singleton()],
     STATUS:            [singleton()],
     SUMMARY:           [singleton()],
     URL:               [singleton()],

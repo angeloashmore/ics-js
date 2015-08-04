@@ -16,6 +16,15 @@ export default class EXDATE extends Property {
   transformer() {
     const valueIsDate = this.props.VALUE == 'DATE';
     const format = valueIsDate ? ICS.DateFormat : ICS.DateTimeFormat;
-    return this.value.map(value => formatDate(format, value)).join();
+
+    return this.value.map(function(value) {
+      if (valueIsDate) {
+        // Remove timezone offset
+        const offset = value.getTimezoneOffset() * 60000;
+        value = new Date(value.getTime() + offset);
+      }
+
+      return formatDate(format, value);
+    }).join();
   }
 }

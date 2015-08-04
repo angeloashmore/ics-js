@@ -11,6 +11,13 @@ export default class DTSTAMP extends Property {
 
   transformer() {
     const valueIsDate = this.props.VALUE == 'DATE';
+
+    if (valueIsDate) {
+      // Remove timezone offset
+      const offset = this.value.getTimezoneOffset() * 60000;
+      this.value = new Date(this.value.getTime() + offset);
+    }
+
     const format = valueIsDate ? ICS.DateFormat : ICS.DateTimeFormat;
     return formatDate(format, this.value);
   }

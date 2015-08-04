@@ -6,10 +6,19 @@ export default class DTSTAMP extends Property {
   static propName = 'DTSTAMP';
 
   shortTransformer() {
-    return /[0-9]{8}T[0-9]{6}/.test(this.value);
+    return !(this.value instanceof Date);
   }
 
   transformer() {
-    return formatDate(ICS.DateTimeFormat, new Date(this.value));
+    const valueIsDate = this.props.VALUE == 'DATE';
+
+    if (valueIsDate) {
+      // Remove timezone offset
+      const offset = this.value.getTimezoneOffset() * 60000;
+      this.value = new Date(this.value.getTime() + offset);
+    }
+
+    const format = valueIsDate ? ICS.DateFormat : ICS.DateTimeFormat;
+    return formatDate(format, this.value);
   }
 }

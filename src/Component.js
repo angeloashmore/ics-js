@@ -7,7 +7,7 @@ import {
 } from './errors';
 
 export default class Component {
-  static separator = '\n';
+  static separator = '\r\n';
 
   static requiredProps = [];
 

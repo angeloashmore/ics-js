@@ -30,12 +30,13 @@ export default class Component {
     return Object.freeze(this.props().map(prop => prop.constructor.propName));
   }
 
-  addProp(name, value, props) {
+  // Set props to null or {} if not needed
+  addProp(name, value, props, skipTransformer) {
     const { validProps } = this.constructor;
     if (!validProps[name]) throw new InvalidProvidedPropError();
 
     const PropClass = properties[name] || properties._default(name);
-    const prop = new PropClass(value, props);
+    const prop = new PropClass(value, props, skipTransformer);
     validProps[name].forEach(validator => validator(this, prop));
 
     this._props.push(prop);

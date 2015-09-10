@@ -21,7 +21,7 @@ const todo = new ICS.VTODO();
 todo.addProp('UID', '1');
 todo.addProp('DTSTAMP', new Date('2015-07-18 10:00:00'));
 todo.addProp('DUE', new Date('2015-07-19 10:00:00'));
-todo.addProp('SUMMARY', 'To Do');
+todo.addProp('SUMMARY', 'To Do (the purpose of creating this long string is to test the 75 character limit per the RFC)');
 todo.addProp('CATEGORIES', ['WORK', 'FAMILY']);
 
 event.addComponent(eventAlarm);
@@ -48,7 +48,8 @@ const icsString = 'BEGIN:VCALENDAR\r\n' +
                   'UID:1\r\n' +
                   'DTSTAMP:20150718T100000\r\n' +
                   'DUE:20150719T100000\r\n' +
-                  'SUMMARY:To Do\r\n' +
+                  'SUMMARY:To Do (the purpose of creating this long string is to test the 75 c\r\n' +
+                  ' haracter limit per the RFC)\r\n' +
                   'CATEGORIES:WORK,FAMILY\r\n' +
                   'END:VTODO\r\n' +
                   'END:VCALENDAR';

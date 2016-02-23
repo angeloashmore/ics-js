@@ -2,7 +2,7 @@
   "name": "ics-js",
   "version": "0.8.5",
   "description": "Create ICS files in ES6",
-  "main": "src/ICS.js",
+  "main": "dist/ics-js.js",
   "scripts": {
     "lint": "eslint src test",
     "test": "mocha",

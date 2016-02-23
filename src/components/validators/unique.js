@@ -18,7 +18,6 @@ export default function unique(uniqueNames) {
     const a = new Set(names);
     const b = new Set([subjectName, ...uniqueNames]);
     const difference = new Set([...a].filter(x => !b.has(x)));
-    return difference > 1 ? false : true;
 
     if (difference > 1) throw new ValidationError();
   };

@@ -11,7 +11,7 @@ export default class VCALENDAR extends Component {
     VERSION:   [singleton()],
 
     CALSCALE:  [singleton()],
-    METHOD:    [singleton()],
+    METHOD:    [singleton()]
   }
 
   static validComponents = {
@@ -19,6 +19,6 @@ export default class VCALENDAR extends Component {
     VTODO:      [],
     VJOURNAL:   [],
     VFREEBUSY:  [],
-    VTIMEZONE:  [],
+    VTIMEZONE:  []
   }
 }

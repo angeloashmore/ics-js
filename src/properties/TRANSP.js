@@ -8,6 +8,6 @@ export default class TRANSP extends Property {
   }
 
   transformer() {
-    return !!this.value ? 'TRANSPARENT' : 'OPAQUE';
+    return this.value ? 'TRANSPARENT' : 'OPAQUE';
   }
 }

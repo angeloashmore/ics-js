@@ -1,4 +1,3 @@
-import formatDate from 'format-date';
 import Property from '../Property';
 
 export default class CATEGORIES extends Property {

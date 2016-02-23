@@ -39,10 +39,10 @@ export default class VEVENT extends Component {
     'REQUEST-STATUS':  [],
     RELATED:           [],
     RESOURCES:         [],
-    RDATE:             [],
+    RDATE:             []
   }
 
   static validComponents = {
-    VALARM: [],
+    VALARM: []
   }
 }

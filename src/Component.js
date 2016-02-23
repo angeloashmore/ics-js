@@ -89,7 +89,7 @@ export default class Component {
       this.prefix,
       ...props,
       ...components,
-      this.suffix,
+      this.suffix
     ].join(this.constructor.separator);
   }
 

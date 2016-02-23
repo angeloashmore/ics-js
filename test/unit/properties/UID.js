@@ -4,7 +4,7 @@ import { UID } from '../../../src/properties';
 
 propertyTest('UID', {
   transformableValue: '123',
-  transformedValue: '123',
+  transformedValue: '123'
 });
 
 describe('UID', function() {

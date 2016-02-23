@@ -4,7 +4,7 @@ import { TRANSP } from '../../../src/properties';
 
 propertyTest('TRANSP', {
   transformableValue: true,
-  transformedValue: 'TRANSPARENT',
+  transformedValue: 'TRANSPARENT'
 });
 
 describe('UID', function() {

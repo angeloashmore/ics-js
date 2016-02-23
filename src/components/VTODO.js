@@ -40,10 +40,10 @@ export default class VTODO extends Component {
     'REQUEST-STATUS':  [],
     RELATED:           [],
     RESOURCES:         [],
-    RDATE:             [],
+    RDATE:             []
   }
 
   static validComponents = {
-    VALARM: [],
+    VALARM: []
   }
 }

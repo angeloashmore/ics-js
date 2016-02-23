@@ -3,8 +3,6 @@ import ICS from '../../src/ICS';
 import Property from '../../src/Property';
 import Component from '../../src/Component';
 
-const string = 'BEGIN:VCALENDAR\r\nEND:VCALENDAR';
-
 describe('ICS', function() {
   describe('Property', function() {
     it('should return the Property class', function() {

@@ -17,6 +17,6 @@ export default class VALARM extends Component {
     SUMMARY:      [singleton()],
     ATTACH:       [singleton()],
 
-    ATTENDEE:     [],
+    ATTENDEE:     []
   }
 }

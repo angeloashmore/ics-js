@@ -7,7 +7,7 @@ const value = 'value';
 const prop = new ICS.Property(value);
 const propProps = {
   KEY1: 'VALUE1',
-  KEY2: 'VALUE2',
+  KEY2: 'VALUE2'
 };
 const propWithProps = new ICS.Property(value, propProps);
 

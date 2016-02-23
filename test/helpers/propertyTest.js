@@ -7,7 +7,6 @@ export default function(name, opts) {
       transformableValue,
       transformableProps,
       transformedValue,
-      shortableValue,
       shortableProps
     } = opts;
 

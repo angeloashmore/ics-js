@@ -1,4 +1,4 @@
-import formatDate from 'format-date';
+import formatoid from 'formatoid';
 import ICS from '../ICS';
 import Property from '../Property';
 
@@ -24,7 +24,7 @@ export default class EXDATE extends Property {
         value = new Date(value.getTime() + offset);
       }
 
-      return formatDate(format, value);
+      return formatoid(value, format);
     }).join();
   }
 }

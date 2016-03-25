@@ -1,4 +1,4 @@
-import formatDate from 'format-date';
+import formatoid from 'formatoid';
 import ICS from '../ICS';
 import Property from '../Property';
 
@@ -19,6 +19,6 @@ export default class DTSTAMP extends Property {
     }
 
     const format = valueIsDate ? ICS.DateFormat : ICS.DateTimeFormat;
-    return formatDate(format, this.value);
+    return formatoid(this.value, format);
   }
 }

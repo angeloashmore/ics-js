@@ -7,8 +7,8 @@ export default class ICS {
   static Component = Component;
 
   static MIME_TYPE = 'text/calendar';
-  static DateFormat = '{year}{month}{day}';
-  static DateTimeFormat = '{year}{month}{day}T{hours}{minutes}{seconds}';
+  static DateFormat = 'YYYYMMDD'
+  static DateTimeFormat = 'YYYYMMDDTHHmmss'
 }
 
 for (let componentName in components) {

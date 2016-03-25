@@ -316,9 +316,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	var _formatDate = __webpack_require__(8);
+	var _formatoid = __webpack_require__(8);
 
-	var _formatDate2 = _interopRequireDefault(_formatDate);
+	var _formatoid2 = _interopRequireDefault(_formatoid);
 
 	var _ICS = __webpack_require__(4);
 
@@ -362,7 +362,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      }
 
 	      var format = valueIsDate ? _ICS2.default.DateFormat : _ICS2.default.DateTimeFormat;
-	      return (0, _formatDate2.default)(format, this.value);
+	      return (0, _formatoid2.default)(this.value, format);
 	    }
 	  }]);
 
@@ -407,8 +407,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	ICS.Property = _Property2.default;
 	ICS.Component = _Component2.default;
 	ICS.MIME_TYPE = 'text/calendar';
-	ICS.DateFormat = '{year}{month}{day}';
-	ICS.DateTimeFormat = '{year}{month}{day}T{hours}{minutes}{seconds}';
+	ICS.DateFormat = 'YYYYMMDD';
+	ICS.DateTimeFormat = 'YYYYMMDDTHHmmss';
 	exports.default = ICS;
 
 
@@ -521,37 +521,127 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 8 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var format = __webpack_require__(36);
-	var leftpad = __webpack_require__(37);
-	var days = __webpack_require__(35);
-	var months = __webpack_require__(38);
+	"use strict";
 
-	module.exports = formatDate;
+	const months = __webpack_require__(37)
+	    , days = __webpack_require__(35)
+	    , fillo = __webpack_require__(36)
+	    , ParseIt = __webpack_require__(38).Parser
+	    ;
 
-	function formatDate (template, date) {
-	  if (!date) date = new Date;
+	const parser = new ParseIt({
+	    // Years
+	    /// 2015
+	    "YYYY": function (i) { return i.getFullYear(); }
 
-	  return format(template, {
-	    day: leftpad(date.getDate(), 2, '0'),
-	    month: leftpad(date.getMonth() + 1, 2, '0'),
-	    year: date.getFullYear(),
-	    hours: leftpad(date.getHours(), 2, '0'),
-	    minutes: leftpad(date.getMinutes(), 2, '0'),
-	    seconds: leftpad(date.getSeconds(), 2, '0'),
-	    'day-name': days[date.getDay()],
-	    'month-name': months[date.getMonth()],
+	    // 15
+	  , "YY": function (i) { return i.getFullYear() % 100; }
 
-	    // utc
-	    'utc-day': leftpad(date.getUTCDate(), 2, '0'),
-	    'utc-month': leftpad(date.getUTCMonth() + 1, 2, '0'),
-	    'utc-year': date.getUTCFullYear(),
-	    'utc-hours': leftpad(date.getUTCHours(), 2, '0'),
-	    'utc-minutes': leftpad(date.getUTCMinutes(), 2, '0'),
-	    'utc-seconds': leftpad(date.getUTCSeconds(), 2, '0'),
-	    'utc-day-name': days[date.getUTCDay()],
-	    'utc-month-name': months[date.getUTCMonth()]
-	  });
-	}
+	    // Months
+	    // January
+	  , "MMMM": function (i) { return months[i.getMonth()]; }
+
+	    // Jan
+	  , "MMM": function (i) { return months.abbr[i.getMonth()]; }
+
+	    // 01
+	  , "MM": function (i) { return fillo(i.getMonth() + 1); }
+
+	    // 1
+	  , "M": function (i) { return i.getMonth() + 1; }
+
+	    // Days
+	    // Sunday
+	  , "dddd": function (i) { return days[i.getDay()]; }
+	    // Sun
+	  , "ddd": function (i) { return days.abbr[i.getDay()]; }
+	    // Su
+	  , "dd": function (i) { return days.short[i.getDay()]; }
+	    // 0
+	  , "d": function (i) { return i.getDay(); }
+
+	    // Dates
+	    // 06  Day in month
+	  , "DD": function (i) { return fillo(i.getDate()); }
+	    // 6   Day in month
+	  , "D": function (i) { return i.getDate(); }
+
+	    // AM/PM
+	    // AM/PM
+	  , "A": function (i) { return i.getHours() >= 12 ? "PM" : "AM"; }
+	    // am/pm
+	  , "a": function (i) { return i.getHours() >= 12 ? "pm" : "am"; }
+
+	    // Hours
+	    // 08 Hour
+	  , "hh": function (i) { return fillo(i.getHours() % 12 || 12); }
+	    // 8 Hour
+	  , "h": function (i) { return i.getHours() % 12 || 12; }
+	    // (alias)
+	  , "HH": function (i) { return fillo(i.getHours()); }
+	    // (alias)
+	  , "H": function (i) { return i.getHours(); }
+
+	    // Minutes
+	    // 09 Minute
+	  , "mm": function (i) { return fillo(i.getMinutes()); }
+	    // 9  Minute
+	  , "m": function (i) { return i.getMinutes(); }
+
+	    // Seconds
+	    // 09 Seconds
+	  , "ss": function (i) { return fillo(i.getSeconds()); }
+
+	    // 9  Seconds
+	  , "s": function (i) { return i.getSeconds(); }
+	});
+
+	/**
+	 * formatoid
+	 * Formats the date into a given format.
+	 *
+	 * Usable format fields:
+	 *
+	 *  - **Years**
+	 *      - `YYYY` (e.g. `"2015"`)
+	 *      - `YY` (e.g. `"15"`)
+	 *  - **Months**
+	 *      - `MMMM` (e.g. `"January"`)
+	 *      - `MMM` (e.g. `"Jan"`)
+	 *      - `MM` (e.g. `"01"`)
+	 *      - `M` (e.g. `"1"`)
+	 *  - **Days**
+	 *      - `dddd` (e.g. `"Sunday"`)
+	 *      - `ddd` (e.g. `"Sun"`)
+	 *      - `dd` (e.g. `"Su"`)
+	 *      - `d` (e.g. `"Su"`)
+	 *  - **Dates**
+	 *      - `DD` (e.g. `"07"`)
+	 *      - `D` (e.g. `"7"`)
+	 *  - **AM/PM**
+	 *      - `A` (e.g. `"AM"`)
+	 *      - `a` (e.g. `"pm"`)
+	 *  - **Hours**
+	 *      - `hh` (e.g. `"07"`)–12 hour format
+	 *      - `h` (e.g. `"7"`)
+	 *      - `HH` (e.g. `"07"`)–24 hour format
+	 *      - `H` (e.g. `"7"`)
+	 *  - **Minutes**
+	 *      - `mm` (e.g. `"07"`)
+	 *      - `m` (e.g. `"7"`)
+	 *  - **Seconds**
+	 *      - `ss` (e.g. `"07"`)
+	 *      - `s` (e.g. `"7"`)
+	 *
+	 * @name formatoid
+	 * @function
+	 * @param {Date} i The date object.
+	 * @param {String} f The date format.
+	 * @return {String} The formatted date (as string).
+	 */
+	module.exports = function formatoid (i, f) {
+	    return parser.run(f, [i]);
+	};
 
 
 /***/ },
@@ -877,8 +967,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function required() {
 	  return function (component, subject) {
-	    var subjectName = undefined;
-	    var names = undefined;
+	    var subjectName = void 0;
+	    var names = void 0;
 
 	    if (subject instanceof _Property2.default) {
 	      subjectName = subject.constructor.propName;
@@ -917,8 +1007,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function singleton() {
 	  return function (component, subject) {
-	    var subjectName = undefined;
-	    var names = undefined;
+	    var subjectName = void 0;
+	    var names = void 0;
 
 	    if (subject instanceof _Property2.default) {
 	      subjectName = subject.constructor.propName;
@@ -962,8 +1052,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function unique(uniqueNames) {
 	  return function (component, subject) {
-	    var subjectName = undefined;
-	    var names = undefined;
+	    var subjectName = void 0;
+	    var names = void 0;
 
 	    if (subject instanceof _Property2.default) {
 	      subjectName = subject.constructor.propName;
@@ -1346,9 +1436,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	var _formatDate = __webpack_require__(8);
+	var _formatoid = __webpack_require__(8);
 
-	var _formatDate2 = _interopRequireDefault(_formatDate);
+	var _formatoid2 = _interopRequireDefault(_formatoid);
 
 	var _ICS = __webpack_require__(4);
 
@@ -1399,7 +1489,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	          value = new Date(value.getTime() + offset);
 	        }
 
-	        return (0, _formatDate2.default)(format, value);
+	        return (0, _formatoid2.default)(value, format);
 	      }).join();
 	    }
 	  }]);
@@ -1598,7 +1688,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	var _simpleGuid = __webpack_require__(39);
+	var _simpleGuid = __webpack_require__(40);
 
 	var _simpleGuid2 = _interopRequireDefault(_simpleGuid);
 
@@ -1826,70 +1916,36 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * Licensed under the MIT license.
 	 */
 
-	module.exports = ['Sunday', 'Monday', 'Tuesday', 'Wendesday', 'Thursday', 'Friday', 'Saturday'];
+	module.exports = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+	module.exports.abbr = ['Sun', 'Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat'];
+	module.exports.short = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
+
 
 /***/ },
 /* 36 */
 /***/ function(module, exports) {
 
-	module.exports = format;
-
-	function format(text) {
-	  var context;
-
-	  if (typeof arguments[1] == 'object' && arguments[1]) {
-	    context = arguments[1];
-	  } else {
-	    context = Array.prototype.slice.call(arguments, 1);
-	  }
-
-	  return String(text).replace(/\{?\{([^{}]+)}}?/g, replace(context));
+	/**
+	 * fillo
+	 * Fill additional characters at the beginning of the string.
+	 *
+	 * @name fillo
+	 * @function
+	 * @param {String|Number} what The input snippet (number, string or anything that can be stringified).
+	 * @param {Number} size The width of the final string (default: `2`).
+	 * @param {String} ch The character to repeat (default: `"0"`).
+	 * @return {String} The input value with filled characters.
+	 */
+	module.exports = function fillo (what, size, ch) {
+	    size = size || 2;
+	    ch = ch || "0";
+	    what = what.toString();
+	    return ch.repeat(size - what.length) + what;
 	};
-
-	function replace (context, nil){
-	  return function (tag, name) {
-	    if (tag.substring(0, 2) == '{{' && tag.substring(tag.length - 2) == '}}') {
-	      return '{' + name + '}';
-	    }
-
-	    if (!context.hasOwnProperty(name)) {
-	      return tag;
-	    }
-
-	    if (typeof context[name] == 'function') {
-	      return context[name]();
-	    }
-
-	    return context[name];
-	  }
-	}
 
 
 /***/ },
 /* 37 */
-/***/ function(module, exports) {
-
-	module.exports = leftpad;
-
-	function leftpad (str, len, ch) {
-	  str = String(str);
-
-	  var i = -1;
-
-	  ch || (ch = ' ');
-	  len = len - str.length;
-
-
-	  while (++i < len) {
-	    str = ch + str;
-	  }
-
-	  return str;
-	}
-
-
-/***/ },
-/* 38 */
 /***/ function(module, exports) {
 
 	/*!
@@ -1901,8 +1957,121 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	module.exports = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
+	module.exports.abbr = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+
+/***/ },
+/* 38 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	const regexEscape = __webpack_require__(39);
+
+	class ParseIt {
+	    /**
+	     * ParseIt
+	     * The `ParseIt` class. It can be used to use the same data object but with different formats/arguments.
+	     *
+	     * @name ParseIt
+	     * @function
+	     * @param {Object} obj An object containing the fields to replace.
+	     */
+	    constructor (obj) {
+	        this.obj = obj || {};
+	        this.re = new RegExp("^(" + Object.keys(obj).map(regexEscape).join("|") + ")");
+	    }
+
+	    /**
+	     * run
+	     * Replaces the fields in the format string with data coming from the data object.
+	     *
+	     *
+	     * @name parseIt
+	     * @function
+	     * @param {String} format The format input.
+	     * @param {Array} args An array of arguments to be passed to the replace function (stored in the `obj` object).
+	     * @return {String} The result as string.
+	     */
+	    run (format, args) {
+	        var result = "";
+	        args = args || [];
+	        do {
+	            let arr = format.match(this.re)
+	              , field = arr && arr[1]
+	              , c = field || format.charAt(0)
+	              ;
+
+	            if (field) {
+	                let value = this.obj[field];
+	                if (typeof value === "function") {
+	                    value = value.apply(this, args);
+	                }
+	                result += value;
+	            } else {
+	                result += c;
+	            }
+	            format = format.substring(c.length);
+	        } while (format);
+	        return result;
+	    }
+	}
+
+	/**
+	 * parseIt
+	 * A wrapper around the `ParseIt` class. The `ParseIt` constructor is accessible using `parseIt.Parser`.
+	 *
+	 * @name parseIt
+	 * @function
+	 * @param {String} format The format input.
+	 * @param {Object} obj An object containing the fields to replace.
+	 * @param {Array} args An array of arguments to be passed to the replace function (stored in the `obj` object).
+	 * @return {String} The result as string.
+	 */
+	function parseIt(format, obj, args) {
+	    return new ParseIt(obj).run(format, args);
+	}
+
+	parseIt.Parser = ParseIt;
+
+	module.exports = parseIt;
+
+
 /***/ },
 /* 39 */
+/***/ function(module, exports) {
+
+	/**
+	 * RegexEscape
+	 * Escapes a string for using it in a regular expression.
+	 *
+	 * @name RegexEscape
+	 * @function
+	 * @param {String} input The string that must be escaped.
+	 * @return {String} The escaped string.
+	 */
+	function RegexEscape(input) {
+	    return input.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
+	}
+
+	/**
+	 * proto
+	 * Adds the `RegexEscape` function to `RegExp` class.
+	 *
+	 * @name proto
+	 * @function
+	 * @return {Function} The `RegexEscape` function.
+	 */
+	RegexEscape.proto = function () {
+	    RegExp.escape = RegexEscape;
+	    return RegexEscape;
+	};
+
+	module.exports = RegexEscape;
+
+
+/***/ },
+/* 40 */
 /***/ function(module, exports) {
 
 	

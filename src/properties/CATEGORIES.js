@@ -4,7 +4,7 @@ export default class CATEGORIES extends Property {
   static propName = 'CATEGORIES';
 
   shortTransformer() {
-    return typeof this.value === 'string';
+    return (typeof this.value === 'string' || this.value instanceof String);
   }
 
   transformer() {

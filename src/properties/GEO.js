@@ -4,7 +4,7 @@ export default class GEO extends Property {
   static propName = 'GEO';
 
   shortTransformer() {
-    return typeof this.value === 'string';
+    return (typeof this.value === 'string' || this.value instanceof String);
   }
 
   transformer() {

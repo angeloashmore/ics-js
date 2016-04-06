@@ -4,7 +4,7 @@ export default class TRANSP extends Property {
   static propName = 'TRANSP';
 
   shortTransformer() {
-    return typeof this.value === 'string';
+    return (typeof this.value === 'string' || this.value instanceof String);
   }
 
   transformer() {

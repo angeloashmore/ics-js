@@ -6,7 +6,7 @@ propertyTest('EXDATE', {
 });
 
 propertyTest('EXDATE', {
+  transformableProps: {VALUE: 'DATE'},
   transformableValue: [new Date('1991-03-07'), new Date('1991-07-11')],
-  transformableProps: { VALUE: 'DATE' },
   transformedValue: '19910307,19910711'
 });

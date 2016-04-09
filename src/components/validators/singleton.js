@@ -1,8 +1,14 @@
 import Property from '../../Property';
 import Component from '../../Component';
-import { ValidationError } from '../../errors';
+import {ValidationError} from '../../errors';
 
-export default function singleton() {
+/**
+ * Validator to ensure only one instance of the subject is present in the
+ * component.
+ *
+ * @throws {ValidationError} An instance of the subject is already present in the component.
+ */
+export default () => {
   return (component, subject) => {
     let subjectName;
     let names;
@@ -15,7 +21,12 @@ export default function singleton() {
       names = component.componentNames();
     }
 
-    const filtered = names.filter(name => name === subjectName);
-    if (filtered.length >= 1) throw new ValidationError();
+    const filtered = names.filter((name) => {
+      return name === subjectName;
+    });
+
+    if (filtered.length >= 1) {
+      throw new ValidationError();
+    }
   };
-}
+};

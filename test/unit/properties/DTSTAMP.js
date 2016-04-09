@@ -6,7 +6,7 @@ propertyTest('DTSTAMP', {
 });
 
 propertyTest('DTSTAMP', {
+  transformableProps: {VALUE: 'DATE'},
   transformableValue: new Date('1991-03-07'),
-  transformableProps: { VALUE: 'DATE' },
   transformedValue: '19910307'
 });

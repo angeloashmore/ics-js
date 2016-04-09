@@ -1,7 +1,6 @@
 {
-  "presets": ["es2015"],
-  "plugins": [
-    "transform-class-properties",
-    "transform-export-extensions"
+  "presets": [
+    "es2015",
+    "stage-0"
   ]
 }

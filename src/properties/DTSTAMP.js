@@ -1,24 +1,42 @@
-import formatoid from 'formatoid';
-import ICS from '../ICS';
+import {formatDate} from '../helpers';
 import Property from '../Property';
 
+/**
+ * DTSTAMP property.
+ *
+ * @see https://tools.ietf.org/html/rfc5545#section-3.8.7.2
+ */
 export default class DTSTAMP extends Property {
   static propName = 'DTSTAMP';
 
-  shortTransformer() {
+  /**
+   * Check if property's value is not an instance of Date.
+   *
+   * @returns {boolean} Whether the property's value is transformed.
+   */
+  shortTransformer () {
     return !(this.value instanceof Date);
   }
 
-  transformer() {
-    const valueIsDate = this.props.VALUE == 'DATE';
+  /**
+   * Format the property's value to a string representation of a date or
+   * datetime.
+   *
+   * @returns {string} The property's transformed value.
+   */
+  transformer () {
+    let value;
+    const valueIsDate = this.props.VALUE === 'DATE';
+
+    value = this.value;
 
     if (valueIsDate) {
       // Remove timezone offset
       const offset = this.value.getTimezoneOffset() * 60000;
-      this.value = new Date(this.value.getTime() + offset);
+
+      value = new Date(this.value.getTime() + offset);
     }
 
-    const format = valueIsDate ? ICS.DateFormat : ICS.DateTimeFormat;
-    return formatoid(this.value, format);
+    return formatDate(value, !valueIsDate);
   }
 }

@@ -1,4 +1,4 @@
-export _default from './_default';
+export base from './base';
 
 export CATEGORIES from './CATEGORIES';
 export CREATED from './CREATED';

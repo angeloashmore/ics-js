@@ -1,16 +1,26 @@
 # ics-js
-Create ICS files in ES6.
+
+Create ICS files in ES6. Works in Node.js or in the browser.
 
 ## Status
 
 [![npm version](https://badge.fury.io/js/ics-js.svg)](http://badge.fury.io/js/ics-js)
 [![Build Status](https://secure.travis-ci.org/angeloashmore/ics-js.svg?branch=master)](http://travis-ci.org/angeloashmore/ics-js?branch=master)
+[![Canonical Code Style](https://img.shields.io/badge/code%20style-canonical-blue.svg?style=flat)](https://github.com/gajus/canonical)
 
 ## Installation
 
-`npm install ics-js`
+```shell
+npm install --save ics-js
+```
 
-## Usage
+## Documentation
+
+[![Documentation](https://doc.esdoc.org/github.com/angeloashmore/ics-js/badge.svg)](https://doc.esdoc.org/github.com/angeloashmore/ics-js/)
+
+[View documentation on ESDoc](https://doc.esdoc.org/github.com/angeloashmore/ics-js/).
+
+## Quick Guide
 
 Import the module:
 
@@ -34,11 +44,14 @@ The following components are implenented:
 ### Add properties to a component
 
 ```js
-// Component#addProp(name, value, props)
-//
-// name: Name of the property
-// value: Value of the property
-// props: Object with properties for the property
+/**
+ * Component#addProp(name, value, props = {}, skipTransformer = false)
+ *
+ * @param {string} name - Name of the property (e.g. DTSTAMP).
+ * @param {*} [value] - Value of the property.
+ * @param {Object} [props={}] - Object of properties for the property. Object keys and values are directly injected.
+ * @param {boolean} [skipTransformer=false] - Explicitly determine if the property's value is transformed.
+ */
 
 cal.addProp('VERSION', 2) // Number(2) is converted to '2.0'
 cal.addProp('PRODID', 'XYZ Corp');
@@ -87,7 +100,3 @@ cal.toString(); // Returns a string
 cal.toBlob(); // Returns a Blob
 cal.toBase64(); // Returns a Promise with a base64 string as the resolved value
 ```
-
-## Acknowledgements
-
-Inspired by [nwcell/ics.js](https://github.com/nwcell/ics.js)

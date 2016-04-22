@@ -24,8 +24,6 @@ module.exports = {
     extensions: ['', '.js']
   },
 
-  target: 'node',
-
   plugins: [
     new webpack.NoErrorsPlugin(),
     new webpack.optimize.OccurenceOrderPlugin(),

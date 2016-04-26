@@ -1,3 +1,6 @@
-import * as components from './components';
-
-export default components;
+export {
+  VALARM,
+  VCALENDAR,
+  VEVENT,
+  VTODO
+} from './components';

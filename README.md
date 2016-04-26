@@ -25,7 +25,13 @@ npm install --save ics-js
 Import the module:
 
 ```js
-import ICS from 'ics-js';
+import * as ICS from 'ics-js';
+```
+
+Or import just what is needed:
+
+```js
+import { VCALENDAR, VEVENT } from 'ics-js';
 ```
 
 ### Create a component

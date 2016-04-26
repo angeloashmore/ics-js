@@ -1,7 +1,7 @@
 /* eslint max-nested-callbacks:0 */
 
 import assert from 'assert';
-import ICS from '../../src';
+import * as ICS from '../../src';
 import Component from '../../src/Component';
 import {VERSION} from '../../src/properties';
 import {

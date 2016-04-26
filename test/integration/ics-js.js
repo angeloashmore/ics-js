@@ -1,5 +1,5 @@
 import assert from 'assert';
-import ICS from '../../src';
+import * as ICS from '../../src';
 
 const cal = new ICS.VCALENDAR();
 

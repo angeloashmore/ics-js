@@ -188,7 +188,8 @@ export default class Component {
    * Reset the components components and properties to the default empty state.
    */
   reset () {
-    this.internalProps = this.internalComponents = [];
+    this.internalProps = [];
+    this.internalComponents = [];
   }
 
   /**

@@ -4,7 +4,7 @@
   "description": "Create ICS files in ES6",
   "main": "dist/ics-js.js",
   "scripts": {
-    "lint": "eslint src test",
+    "lint": "standard",
     "test": "mocha",
     "build": "webpack --progress --colors",
     "doc": "esdoc -c esdoc.json"
@@ -32,11 +32,9 @@
     "babel-preset-stage-0": "^6.5.0",
     "esdoc": "^0.4.6",
     "esdoc-es7-plugin": "0.0.3",
-    "eslint": "^2.7.0",
-    "eslint-config-canonical": "^1.6.15",
-    "eslint-config-canonical-jsdoc": "^1.2.21",
     "left-pad": "^1.0.1",
     "mocha": "^2.4.5",
+    "standard": "^6.0.8",
     "webpack": "^1.12.14"
   },
   "dependencies": {
@@ -44,17 +42,10 @@
     "lodash": "^4.8.2",
     "simple-guid": "0.0.1"
   },
-  "eslintConfig": {
-    "parser": "babel-eslint",
-    "extends": [
-      "eslint-config-canonical",
-      "eslint-config-canonical-jsdoc"
+  "standard": {
+    "ignore": [
+      "/dist/"
     ],
-    "rules": {
-      "indent": [
-        2,
-        2
-      ]
-    }
+    "parser": "babel-eslint"
   }
 }

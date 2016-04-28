@@ -11,9 +11,9 @@ cal.addProp('PRODID', 'XYZ Corp')
 const event = new ICS.VEVENT()
 
 event.addProp('UID', '1')
-event.addProp('DTSTAMP', new Date('2015-07-18'), {VALUE: 'DATE'})
+event.addProp('DTSTAMP', new Date('2015-07-18'), { VALUE: 'DATE' })
 event.addProp('SUMMARY', 'Birthdate')
-event.addProp('DTSTART', new Date('1991-03-07 07:00:00'), {VALUE: 'DATE-TIME'})
+event.addProp('DTSTART', new Date('1991-03-07 07:00:00'), { VALUE: 'DATE-TIME' })
 event.addProp('DTEND', new Date('1991-03-07 19:30:00'))
 
 const eventAlarm = new ICS.VALARM()

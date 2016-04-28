@@ -3,7 +3,7 @@
 import assert from 'assert'
 import * as ICS from '../../src'
 import Component from '../../src/Component'
-import {VERSION} from '../../src/properties'
+import { VERSION } from '../../src/properties'
 import {
   InvalidComponentError,
   InvalidProvidedComponentError,

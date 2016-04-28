@@ -118,7 +118,7 @@ export default class Component {
    * @returns {Property} Configured property instance.
    */
   addProp (name, value, props = {}, skipTransformer = false) {
-    const {validProps} = this.constructor
+    const { validProps } = this.constructor
 
     if (!validProps[name]) {
       throw new InvalidProvidedPropError()
@@ -164,8 +164,8 @@ export default class Component {
    * @returns {Component} Provided component.
    */
   addComponent (component) {
-    const {validComponents} = this.constructor
-    const {componentName} = component.constructor
+    const { validComponents } = this.constructor
+    const { componentName } = component.constructor
 
     if (!(component instanceof Component)) {
       throw new TypeError('Expected component to be an instance of Component.')
@@ -199,7 +199,7 @@ export default class Component {
    * @returns {boolean} All required properties are present.
    */
   validateRequired () {
-    const {requiredProps} = this.constructor
+    const { requiredProps } = this.constructor
 
     if (difference(requiredProps, this.propNames()).length > 0) {
       throw new InvalidComponentError()

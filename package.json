@@ -42,6 +42,12 @@
     "lodash": "^4.8.2",
     "simple-guid": "0.0.1"
   },
+  "babel": {
+    "presets": [
+      "es2015",
+      "stage-0"
+    ]
+  },
   "standard": {
     "globals": [
       "Blob"

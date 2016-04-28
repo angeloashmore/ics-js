@@ -1,4 +1,4 @@
-import DTSTAMP from './DTSTAMP';
+import DTSTAMP from './DTSTAMP'
 
 /**
  * DUE property.
@@ -6,5 +6,5 @@ import DTSTAMP from './DTSTAMP';
  * @see https://tools.ietf.org/html/rfc5545#section-3.8.2.3
  */
 export default class DUE extends DTSTAMP {
-  static propName = 'DUE';
+  static propName = 'DUE'
 }

@@ -1,5 +1,5 @@
-import Component from '../Component';
-import {singleton, unique} from './validators';
+import Component from '../Component'
+import { singleton, unique } from './validators'
 
 /**
  * VTODO class.
@@ -7,12 +7,12 @@ import {singleton, unique} from './validators';
  * @see https://tools.ietf.org/html/rfc5545#section-3.6.2
  */
 export default class VTODO extends Component {
-  static componentName = 'VTODO';
+  static componentName = 'VTODO'
 
-  static requiredProps = ['DTSTAMP', 'UID'];
+  static requiredProps = ['DTSTAMP', 'UID']
 
   static validProps = {
-    /* eslint-disable key-spacing, sorting/sort-object-props */
+    /* eslint-disable key-spacing */
     DTSTAMP:           [singleton()],
     UID:               [singleton()],
 
@@ -47,7 +47,7 @@ export default class VTODO extends Component {
     RELATED:           [],
     'REQUEST-STATUS':  [],
     RESOURCES:         []
-    /* eslint-disable key-spacing, sorting/sort-object-props */
+    /* eslint-disable key-spacing */
   }
 
   static validComponents = {

@@ -1,4 +1,4 @@
-import Property from '../Property';
+import Property from '../Property'
 
 /**
  * TRANSP property.
@@ -6,7 +6,7 @@ import Property from '../Property';
  * @see https://tools.ietf.org/html/rfc5545#section-3.8.2.7
  */
 export default class TRANSP extends Property {
-  static propName = 'TRANSP';
+  static propName = 'TRANSP'
 
   /**
    * Check if property's value is not a boolean.
@@ -14,7 +14,7 @@ export default class TRANSP extends Property {
    * @returns {boolean} Whether the property's value is transformed.
    */
   shortTransformer () {
-    return typeof this.value !== 'boolean';
+    return typeof this.value !== 'boolean'
   }
 
   /**
@@ -24,6 +24,6 @@ export default class TRANSP extends Property {
    * @returns {string} The property's transformed value.
    */
   transformer () {
-    return this.value ? 'TRANSPARENT' : 'OPAQUE';
+    return this.value ? 'TRANSPARENT' : 'OPAQUE'
   }
 }

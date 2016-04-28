@@ -1,5 +1,5 @@
-import guid from 'simple-guid';
-import Property from '../Property';
+import guid from 'simple-guid'
+import Property from '../Property'
 
 /**
  * UID property.
@@ -7,7 +7,7 @@ import Property from '../Property';
  * @see https://tools.ietf.org/html/rfc5545#section-3.8.4.7
  */
 export default class UID extends Property {
-  static propName = 'UID';
+  static propName = 'UID'
 
   /**
    * Check if property has a value.
@@ -15,7 +15,7 @@ export default class UID extends Property {
    * @returns {boolean} Whether the property's value is transformed.
    */
   shortTransformer () {
-    return Boolean(this.value);
+    return Boolean(this.value)
   }
 
   /**
@@ -24,6 +24,6 @@ export default class UID extends Property {
    * @returns {string} The property's transformed value.
    */
   transformer () {
-    return guid();
+    return guid()
   }
 }

@@ -1,6 +1,6 @@
-import propertyTest from '../../helpers/propertyTest';
+import propertyTest from '../../helpers/propertyTest'
 
 propertyTest('CATEGORIES', {
   transformableValue: ['WORK', 'FAMILY'],
   transformedValue: 'WORK,FAMILY'
-});
+})

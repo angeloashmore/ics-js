@@ -3,4 +3,4 @@ export {
   VCALENDAR,
   VEVENT,
   VTODO
-} from './components';
+} from './components'

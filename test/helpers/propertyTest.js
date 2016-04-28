@@ -1,5 +1,7 @@
-import assert from 'assert';
-import * as properties from '../../src/properties';
+/* eslint-env mocha */
+
+import assert from 'assert'
+import * as properties from '../../src/properties'
 
 export default (name, opts) => {
   describe(name, () => {
@@ -8,20 +10,20 @@ export default (name, opts) => {
       transformableProps,
       transformedValue,
       shortableProps
-    } = opts;
+    } = opts
 
-    const PropertyClass = properties[name]; // eslint-disable-line import/namespace
-    const transformedProp = new PropertyClass(transformableValue, transformableProps);
-    const shortedProp = new PropertyClass(transformedValue, shortableProps);
+    const PropertyClass = properties[name] // eslint-disable-line import/namespace
+    const transformedProp = new PropertyClass(transformableValue, transformableProps)
+    const shortedProp = new PropertyClass(transformedValue, shortableProps)
 
     describe('#transformedValue()', () => {
       it('should transform a transformable value', () => {
-        assert.equal(transformedProp.transformedValue(), transformedValue);
-      });
+        assert.equal(transformedProp.transformedValue(), transformedValue)
+      })
 
       it('should not transform a shorted value', () => {
-        assert.equal(shortedProp.transformedValue(), transformedValue);
-      });
-    });
-  });
-};
+        assert.equal(shortedProp.transformedValue(), transformedValue)
+      })
+    })
+  })
+}

@@ -1,5 +1,5 @@
-import Component from '../Component';
-import {singleton} from './validators';
+import Component from '../Component'
+import { singleton } from './validators'
 
 /**
  * VALARM class.
@@ -7,12 +7,12 @@ import {singleton} from './validators';
  * @see https://tools.ietf.org/html/rfc5545#section-3.6.6
  */
 export default class VALARM extends Component {
-  static componentName = 'VALARM';
+  static componentName = 'VALARM'
 
-  static requiredProps = ['ACTION', 'TRIGGER'];
+  static requiredProps = ['ACTION', 'TRIGGER']
 
   static validProps = {
-    /* eslint-disable key-spacing, sorting/sort-object-props */
+    /* eslint-disable key-spacing */
     ACTION:       [singleton()],
     TRIGGER:      [singleton()],
 
@@ -23,6 +23,6 @@ export default class VALARM extends Component {
     SUMMARY:      [singleton()],
 
     ATTENDEE:     []
-    /* eslint-enable key-spacing, sorting/sort-object-props */
+    /* eslint-enable key-spacing */
   }
 }

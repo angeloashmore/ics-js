@@ -1,221 +1,221 @@
-/* eslint max-nested-callbacks:0 */
+/* eslint-env mocha */
 
-import assert from 'assert';
-import * as ICS from '../../src';
-import Component from '../../src/Component';
-import {VERSION} from '../../src/properties';
+import assert from 'assert'
+import * as ICS from '../../src'
+import Component from '../../src/Component'
+import {VERSION} from '../../src/properties'
 import {
   InvalidComponentError,
   InvalidProvidedComponentError,
   InvalidProvidedPropError,
   ValidationError
-} from '../../src/errors';
+} from '../../src/errors'
 
-const component = new ICS.VCALENDAR();
-const prop = new VERSION(2);
-const component2 = new ICS.VEVENT();
+const component = new ICS.VCALENDAR()
+const prop = new VERSION(2)
+const component2 = new ICS.VEVENT()
 
 describe('Component', () => {
   beforeEach(() => {
-    component.reset();
-  });
+    component.reset()
+  })
 
   describe('#constructor()', () => {
     it('should create a new instance of Component', () => {
-      assert.equal(component instanceof Component, true);
-    });
+      assert.equal(component instanceof Component, true)
+    })
 
     it('should have an empty `internalProps` instance property', () => {
-      assert.deepEqual(component.internalProps, []);
-    });
+      assert.deepEqual(component.internalProps, [])
+    })
 
     it('should have an empty `internalComponents` instance property', () => {
-      assert.deepEqual(component.internalComponents, []);
-    });
-  });
+      assert.deepEqual(component.internalComponents, [])
+    })
+  })
 
   describe('#props()', () => {
     it('should not be mutable', () => {
       assert.throws(() => {
-        component.props().push(prop);
-      }, TypeError);
-    });
+        component.props().push(prop)
+      }, TypeError)
+    })
 
     describe('with no props', () => {
       it('should return an empty array', () => {
-        assert.deepEqual(component.props(), []);
-      });
-    });
+        assert.deepEqual(component.props(), [])
+      })
+    })
 
     describe('with some props', () => {
       it('should return an array with added Property objects', () => {
-        component.addProp('VERSION', 2);
-        assert.deepEqual(component.props(), [prop]);
-      });
-    });
-  });
+        component.addProp('VERSION', 2)
+        assert.deepEqual(component.props(), [prop])
+      })
+    })
+  })
 
   describe('#propNames()', () => {
     describe('with no props', () => {
       it('should return an empty array', () => {
-        assert.deepEqual(component.propNames(), []);
-      });
-    });
+        assert.deepEqual(component.propNames(), [])
+      })
+    })
 
     describe('with some props', () => {
       it('should return an array with added Property objects\' names', () => {
-        component.addProp('VERSION', 2);
-        assert.deepEqual(component.propNames(), [prop.constructor.propName]);
-      });
-    });
-  });
+        component.addProp('VERSION', 2)
+        assert.deepEqual(component.propNames(), [prop.constructor.propName])
+      })
+    })
+  })
 
   describe('#addProp()', () => {
     it('should add a Property', () => {
-      component.addProp('VERSION', 2);
-      assert.deepEqual(component.internalProps, [prop]);
-    });
+      component.addProp('VERSION', 2)
+      assert.deepEqual(component.internalProps, [prop])
+    })
 
     it('should throw an InvalidProvidedPropError if passed an invalid (for the component) prop', () => {
       assert.throws(() => {
-        component.addProp('DTSTART', new Date());
-      }, InvalidProvidedPropError);
-    });
+        component.addProp('DTSTART', new Date())
+      }, InvalidProvidedPropError)
+    })
 
     it('should throw an Error if passed a prop against its requirement validations', () => {
-      component.addProp('VERSION', 2);
+      component.addProp('VERSION', 2)
       assert.throws(() => {
-        component.addProp('VERSION', 2);
-      }, ValidationError);
-    });
-  });
+        component.addProp('VERSION', 2)
+      }, ValidationError)
+    })
+  })
 
   describe('#components()', () => {
     it('should not be mutable', () => {
       assert.throws(() => {
-        component.components().push(component2);
-      }, TypeError);
-    });
+        component.components().push(component2)
+      }, TypeError)
+    })
 
     describe('with no components', () => {
       it('should return an empty array', () => {
-        assert.deepEqual(component.components(), []);
-      });
-    });
+        assert.deepEqual(component.components(), [])
+      })
+    })
 
     describe('with some components', () => {
       it('should return an array with added Component objects', () => {
-        component.addComponent(component2);
-        assert.deepEqual(component.components(), [component2]);
-      });
-    });
-  });
+        component.addComponent(component2)
+        assert.deepEqual(component.components(), [component2])
+      })
+    })
+  })
 
   describe('#componentNames()', () => {
     describe('with no components', () => {
       it('should return an empty array', () => {
-        assert.deepEqual(component.componentNames(), []);
-      });
-    });
+        assert.deepEqual(component.componentNames(), [])
+      })
+    })
 
     describe('with some components', () => {
       it('should return an array with added Component objects\' names', () => {
-        component.addComponent(component2);
-        assert.deepEqual(component.componentNames(), [component2.constructor.componentName]);
-      });
-    });
-  });
+        component.addComponent(component2)
+        assert.deepEqual(component.componentNames(), [component2.constructor.componentName])
+      })
+    })
+  })
 
   describe('#addComponent()', () => {
     it('should add a Component', () => {
-      component.addComponent(component2);
-      assert.deepEqual(component.internalComponents, [component2]);
-    });
+      component.addComponent(component2)
+      assert.deepEqual(component.internalComponents, [component2])
+    })
 
     it('should throw a TypeError if not passed an instance of Component', () => {
       assert.throws(() => {
-        component.addComponent('component');
-      }, TypeError);
-    });
+        component.addComponent('component')
+      }, TypeError)
+    })
 
     it('should throw an InvalidProvidedComponentError if passed an invalid (for the component) component', () => {
-      const invalidComponent = new ICS.VCALENDAR();
+      const invalidComponent = new ICS.VCALENDAR()
 
       assert.throws(() => {
-        component.addComponent(invalidComponent);
-      }, InvalidProvidedComponentError);
-    });
-  });
+        component.addComponent(invalidComponent)
+      }, InvalidProvidedComponentError)
+    })
+  })
 
   describe('#reset()', () => {
     it('should remove all props and components', () => {
-      component.addProp('VERSION', 2);
-      component.addComponent(component2);
-      component.reset();
-      assert.deepEqual(component.internalProps, []);
-      assert.deepEqual(component.internalComponents, []);
-    });
-  });
+      component.addProp('VERSION', 2)
+      component.addComponent(component2)
+      component.reset()
+      assert.deepEqual(component.internalProps, [])
+      assert.deepEqual(component.internalComponents, [])
+    })
+  })
 
   describe('#validateRequired()', () => {
     it('should throw an InvalidComponentError if missing required props', () => {
-      component.addProp('VERSION', 2);
+      component.addProp('VERSION', 2)
       assert.throws(() => {
-        component.validateRequired();
-      }, InvalidComponentError);
-    });
+        component.validateRequired()
+      }, InvalidComponentError)
+    })
 
     it('should return true if all required props are present', () => {
-      component.addProp('VERSION', 2);
-      component.addProp('PRODID', 'XYZ Corp');
-      assert.equal(component.validateRequired(), true);
-    });
-  });
+      component.addProp('VERSION', 2)
+      component.addProp('PRODID', 'XYZ Corp')
+      assert.equal(component.validateRequired(), true)
+    })
+  })
 
   describe('#toString()', () => {
     beforeEach(() => {
-      component.addProp('VERSION', 2);
-      component.addProp('PRODID', 'XYZ Corp');
-    });
+      component.addProp('VERSION', 2)
+      component.addProp('PRODID', 'XYZ Corp')
+    })
 
     it('should return a string', () => {
-      assert.equal(typeof component.toString(), 'string');
-    });
+      assert.equal(typeof component.toString(), 'string')
+    })
 
     it('should begin and end with prefix and suffix', () => {
-      const string = component.toString();
-      const separator = component.constructor.separator;
-      const splitString = string.split(separator);
+      const string = component.toString()
+      const separator = component.constructor.separator
+      const splitString = string.split(separator)
 
-      assert.equal(string.startsWith('BEGIN:'), true);
-      assert.equal(splitString[splitString.length - 1].startsWith('END:'), true);
-    });
-  });
+      assert.equal(string.startsWith('BEGIN:'), true)
+      assert.equal(splitString[splitString.length - 1].startsWith('END:'), true)
+    })
+  })
 
   // Tests involving Blob skipped since Node/io.js does not support it.
 
   describe.skip('#toBlob()', () => {
     beforeEach(() => {
-      component.addProp('VERSION', 2);
-      component.addProp('PRODID', 'XYZ Corp');
-    });
+      component.addProp('VERSION', 2)
+      component.addProp('PRODID', 'XYZ Corp')
+    })
 
     it('should return an instance of Blob', () => {
-      assert.equal(component.toBlob() instanceof Blob, true);
-    });
-  });
+      assert.equal(component.toBlob() instanceof Blob, true)
+    })
+  })
 
   describe.skip('toBase64()', () => {
     beforeEach(() => {
-      component.addProp('VERSION', 2);
-      component.addProp('PRODID', 'XYZ Corp');
-    });
+      component.addProp('VERSION', 2)
+      component.addProp('PRODID', 'XYZ Corp')
+    })
 
     it('should return a string starting with "data:text/calendar,"', () => {
-      const base64 = component.toBase64();
+      const base64 = component.toBase64()
 
-      assert.equal(typeof base64, 'string');
-      assert.equal(base64.startsWith('data:text/calendar,'), true);
-    });
-  });
-});
+      assert.equal(typeof base64, 'string')
+      assert.equal(base64.startsWith('data:text/calendar,'), true)
+    })
+  })
+})

@@ -6,7 +6,7 @@ Create ICS files in ES6. Works in Node.js or in the browser.
 
 [![npm version](https://badge.fury.io/js/ics-js.svg)](http://badge.fury.io/js/ics-js)
 [![Build Status](https://secure.travis-ci.org/angeloashmore/ics-js.svg?branch=master)](http://travis-ci.org/angeloashmore/ics-js?branch=master)
-[![Canonical Code Style](https://img.shields.io/badge/code%20style-canonical-blue.svg?style=flat)](https://github.com/gajus/canonical)
+[![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](http://standardjs.com/)
 
 ## Installation
 

@@ -8,7 +8,7 @@ export default class Property {
    * @abstract
    * @type {string}
    */
-  static propName = 'Property';
+  static propName = 'Property'
 
   /**
    * Create a new property.
@@ -23,7 +23,7 @@ export default class Property {
      *
      * @type {*}
      */
-    this.value = value;
+    this.value = value
 
     /**
      * Object to store the property's properties.
@@ -31,14 +31,14 @@ export default class Property {
      * @private
      * @type {Object}
      */
-    this.props = props || {};
+    this.props = props || {}
 
     /**
      * Determine if the property's value is transformed.
      *
      * @type {boolean}
      */
-    this.skipTransformer = skipTransformer;
+    this.skipTransformer = skipTransformer
   }
 
   /**
@@ -49,7 +49,7 @@ export default class Property {
    * @returns {boolean} Whether the property's value is transformed.
    */
   shortTransformer () {
-    return true;
+    return true
   }
 
   /**
@@ -59,7 +59,7 @@ export default class Property {
    * @returns {*} The property's transformed value.
    */
   transformer () {
-    return this.value;
+    return this.value
   }
 
   /**
@@ -69,10 +69,10 @@ export default class Property {
    */
   transformedValue () {
     if (this.skipTransformer || this.shortTransformer()) {
-      return this.value;
+      return this.value
     }
 
-    return this.transformer();
+    return this.transformer()
   }
 
   /**
@@ -81,13 +81,13 @@ export default class Property {
    * @returns {string} The property's properties formatted for string output.
    */
   transformedProps () {
-    const props = [];
+    const props = []
 
     Object.keys(this.props).forEach((key) => {
-      props.push(key + '=' + this.props[key]);
-    });
+      props.push(key + '=' + this.props[key])
+    })
 
-    return props.join(';');
+    return props.join(';')
   }
 
   /**
@@ -96,11 +96,11 @@ export default class Property {
    * @returns {string} String representation of the property.
    */
   toString () {
-    const hasProps = Object.keys(this.props).length > 0;
-    const key = this.constructor.propName + (hasProps ? ';' + this.transformedProps() : '');
-    const value = this.transformedValue();
-    const keyValuePair = key + ':' + value;
+    const hasProps = Object.keys(this.props).length > 0
+    const key = this.constructor.propName + (hasProps ? ';' + this.transformedProps() : '')
+    const value = this.transformedValue()
+    const keyValuePair = key + ':' + value
 
-    return keyValuePair.match(/.{1,75}/g).join('\r\n ');
+    return keyValuePair.match(/.{1,75}/g).join('\r\n ')
   }
 }

@@ -1,4 +1,4 @@
-import Property from '../Property';
+import Property from '../Property'
 
 /**
  * Generate a generic class with a given name. Used when the property does not
@@ -9,6 +9,6 @@ import Property from '../Property';
  */
 export default (name) => {
   return class base extends Property {
-    static propName = name;
-  };
-};
+    static propName = name
+  }
+}

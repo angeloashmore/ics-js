@@ -1,4 +1,4 @@
-import DTSTAMP from './DTSTAMP';
+import DTSTAMP from './DTSTAMP'
 
 /**
  * RDATE property.
@@ -6,5 +6,5 @@ import DTSTAMP from './DTSTAMP';
  * @see https://tools.ietf.org/html/rfc5545#section-3.8.5.2
  */
 export default class RDATE extends DTSTAMP {
-  static propName = 'RDATE';
+  static propName = 'RDATE'
 }

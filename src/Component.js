@@ -1,11 +1,11 @@
-import difference from 'lodash/difference';
-import {MIME_TYPE} from './constants';
-import * as properties from './properties';
+import difference from 'lodash/difference'
+import { MIME_TYPE } from './constants'
+import * as properties from './properties'
 import {
   InvalidComponentError,
   InvalidProvidedComponentError,
   InvalidProvidedPropError
-} from './errors';
+} from './errors'
 
 /**
  * Base class for components.
@@ -17,14 +17,14 @@ export default class Component {
    * @abstract
    * @type {string}
    */
-  static componentName = 'Component';
+  static componentName = 'Component'
 
   /**
    * String used to separate lines when returning the component as a string.
    *
    * @type {string}
    */
-  static separator = '\r\n';
+  static separator = '\r\n'
 
   /**
    * Array of required properties.
@@ -32,7 +32,7 @@ export default class Component {
    * @abstract
    * @type {string[]}
    */
-  static requiredProps = [];
+  static requiredProps = []
 
   /**
    * Valid properties with appropriate validators.
@@ -40,7 +40,7 @@ export default class Component {
    * @abstract
    * @type {Object}
    */
-  static validProps = {};
+  static validProps = {}
 
   /**
    * Valid components with appropriate validators.
@@ -48,7 +48,7 @@ export default class Component {
    * @abstract
    * @type {Object}
    */
-  static validComponents = {};
+  static validComponents = {}
 
   /**
    * Create a new component.
@@ -60,7 +60,7 @@ export default class Component {
      * @private
      * @type {string}
      */
-    this.prefix = 'BEGIN:' + this.constructor.componentName;
+    this.prefix = 'BEGIN:' + this.constructor.componentName
 
     /**
      * Suffix used when returning the component as a string.
@@ -68,7 +68,7 @@ export default class Component {
      * @private
      * @type {string}
      */
-    this.suffix = 'END:' + this.constructor.componentName;
+    this.suffix = 'END:' + this.constructor.componentName
 
     /**
      * Array to store the component's properties.
@@ -76,7 +76,7 @@ export default class Component {
      * @private
      * @type {Property[]}
      */
-    this.internalProps = [];
+    this.internalProps = []
 
     /**
      * Array to store the component's components.
@@ -84,7 +84,7 @@ export default class Component {
      * @private
      * @type {Component[]}
      */
-    this.internalComponents = [];
+    this.internalComponents = []
   }
 
   /**
@@ -93,7 +93,7 @@ export default class Component {
    * @returns {Property[]} Frozen array of the component's properties.
    */
   props () {
-    return Object.freeze(this.internalProps.slice(0));
+    return Object.freeze(this.internalProps.slice(0))
   }
 
   /**
@@ -103,8 +103,8 @@ export default class Component {
    */
   propNames () {
     return Object.freeze(this.internalProps.map((prop) => {
-      return prop.constructor.propName;
-    }));
+      return prop.constructor.propName
+    }))
   }
 
   /**
@@ -118,22 +118,22 @@ export default class Component {
    * @returns {Property} Configured property instance.
    */
   addProp (name, value, props = {}, skipTransformer = false) {
-    const {validProps} = this.constructor;
+    const {validProps} = this.constructor
 
     if (!validProps[name]) {
-      throw new InvalidProvidedPropError();
+      throw new InvalidProvidedPropError()
     }
 
-    const PropClass = properties[name] || properties.base(name); // eslint-disable-line import/namespace
-    const prop = new PropClass(value, props, skipTransformer);
+    const PropClass = properties[name] || properties.base(name)
+    const prop = new PropClass(value, props, skipTransformer)
 
     validProps[name].forEach((validator) => {
-      validator(this, prop);
-    });
+      validator(this, prop)
+    })
 
-    this.internalProps.push(prop);
+    this.internalProps.push(prop)
 
-    return prop;
+    return prop
   }
 
   /**
@@ -142,7 +142,7 @@ export default class Component {
    * @returns {Component[]} Frozen array of the component's components.
    */
   components () {
-    return Object.freeze(this.internalComponents.slice(0));
+    return Object.freeze(this.internalComponents.slice(0))
   }
 
   /**
@@ -152,8 +152,8 @@ export default class Component {
    */
   componentNames () {
     return Object.freeze(this.internalComponents.map((component) => {
-      return component.constructor.componentName;
-    }));
+      return component.constructor.componentName
+    }))
   }
 
   /**
@@ -164,31 +164,32 @@ export default class Component {
    * @returns {Component} Provided component.
    */
   addComponent (component) {
-    const {validComponents} = this.constructor;
-    const {componentName} = component.constructor;
+    const {validComponents} = this.constructor
+    const {componentName} = component.constructor
 
     if (!(component instanceof Component)) {
-      throw new TypeError('Expected component to be an instance of Component.');
+      throw new TypeError('Expected component to be an instance of Component.')
     }
 
     if (!validComponents[componentName]) {
-      throw new InvalidProvidedComponentError();
+      throw new InvalidProvidedComponentError()
     }
 
     validComponents[componentName].forEach((validator) => {
-      validator(this, component);
-    });
+      validator(this, component)
+    })
 
-    this.internalComponents.push(component);
+    this.internalComponents.push(component)
 
-    return component;
+    return component
   }
 
   /**
    * Reset the components components and properties to the default empty state.
    */
   reset () {
-    this.internalProps = this.internalComponents = [];
+    this.internalProps = []
+    this.internalComponents = []
   }
 
   /**
@@ -198,13 +199,13 @@ export default class Component {
    * @returns {boolean} All required properties are present.
    */
   validateRequired () {
-    const {requiredProps} = this.constructor;
+    const {requiredProps} = this.constructor
 
     if (difference(requiredProps, this.propNames()).length > 0) {
-      throw new InvalidComponentError();
+      throw new InvalidComponentError()
     }
 
-    return true;
+    return true
   }
 
   /**
@@ -213,22 +214,22 @@ export default class Component {
    * @returns {string} String representation of the component.
    */
   toString () {
-    this.validateRequired();
+    this.validateRequired()
 
     const props = this.internalProps.map((prop) => {
-      return prop.toString();
-    });
+      return prop.toString()
+    })
 
     const components = this.internalComponents.map((component) => {
-      return component.toString();
-    });
+      return component.toString()
+    })
 
     return [
       this.prefix,
       ...props,
       ...components,
       this.suffix
-    ].join(this.constructor.separator);
+    ].join(this.constructor.separator)
   }
 
   /**
@@ -238,7 +239,7 @@ export default class Component {
    * @returns {Blob} Blob representation of the component.
    */
   toBlob () {
-    return new Blob([this.toString()], {type: MIME_TYPE});
+    return new Blob([this.toString()], {type: MIME_TYPE})
   }
 
   /**
@@ -248,20 +249,20 @@ export default class Component {
    * @returns {Promise<string, DOMError>} Promise that resolves with a Base64 encoded string.
    */
   toBase64 () {
-    const blob = this.toBlob();
-    const reader = new window.FileReader();
+    const blob = this.toBlob()
+    const reader = new window.FileReader()
 
     return new Promise((resolve, reject) => {
-      reader.readAsDataURL(blob);
+      reader.readAsDataURL(blob)
       reader.onloadend = () => {
-        resolve(reader.result);
-      };
+        resolve(reader.result)
+      }
       reader.onerror = () => {
-        reject(reader.error);
-      };
+        reject(reader.error)
+      }
       reader.onabort = () => {
-        reject();
-      };
-    });
+        reject()
+      }
+    })
   }
 }

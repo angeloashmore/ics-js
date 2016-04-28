@@ -1,4 +1,4 @@
-import Property from '../Property';
+import Property from '../Property'
 
 /**
  * VERSION property.
@@ -6,7 +6,7 @@ import Property from '../Property';
  * @see https://tools.ietf.org/html/rfc5545#section-3.7.4
  */
 export default class VERSION extends Property {
-  static propName = 'VERSION';
+  static propName = 'VERSION'
 
   /**
    * Check if property's value is not a number.
@@ -14,7 +14,7 @@ export default class VERSION extends Property {
    * @returns {boolean} Whether the property's value is transformed.
    */
   shortTransformer () {
-    return typeof this.value !== 'number';
+    return typeof this.value !== 'number'
   }
 
   /**
@@ -23,6 +23,6 @@ export default class VERSION extends Property {
    * @returns {string} The property's transformed value.
    */
   transformer () {
-    return parseFloat(this.value).toFixed(1);
+    return parseFloat(this.value).toFixed(1)
   }
 }

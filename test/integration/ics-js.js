@@ -1,37 +1,39 @@
-import assert from 'assert';
-import * as ICS from '../../src';
+/* eslint-env mocha */
 
-const cal = new ICS.VCALENDAR();
+import assert from 'assert'
+import * as ICS from '../../src'
 
-cal.addProp('VERSION', 2);
-cal.addProp('PRODID', 'XYZ Corp');
+const cal = new ICS.VCALENDAR()
 
-const event = new ICS.VEVENT();
+cal.addProp('VERSION', 2)
+cal.addProp('PRODID', 'XYZ Corp')
 
-event.addProp('UID', '1');
-event.addProp('DTSTAMP', new Date('2015-07-18'), {VALUE: 'DATE'});
-event.addProp('SUMMARY', 'Birthdate');
-event.addProp('DTSTART', new Date('1991-03-07 07:00:00'), {VALUE: 'DATE-TIME'});
-event.addProp('DTEND', new Date('1991-03-07 19:30:00'));
+const event = new ICS.VEVENT()
 
-const eventAlarm = new ICS.VALARM();
+event.addProp('UID', '1')
+event.addProp('DTSTAMP', new Date('2015-07-18'), {VALUE: 'DATE'})
+event.addProp('SUMMARY', 'Birthdate')
+event.addProp('DTSTART', new Date('1991-03-07 07:00:00'), {VALUE: 'DATE-TIME'})
+event.addProp('DTEND', new Date('1991-03-07 19:30:00'))
 
-eventAlarm.addProp('ACTION', 'DISPLAY');
-eventAlarm.addProp('TRIGGER', '-PT12H');
-eventAlarm.addProp('DESCRIPTION', 'Event reminder');
+const eventAlarm = new ICS.VALARM()
 
-const todo = new ICS.VTODO();
+eventAlarm.addProp('ACTION', 'DISPLAY')
+eventAlarm.addProp('TRIGGER', '-PT12H')
+eventAlarm.addProp('DESCRIPTION', 'Event reminder')
 
-todo.addProp('UID', '1');
-todo.addProp('DTSTAMP', new Date('2015-07-18 10:00:00'));
-todo.addProp('DUE', new Date('2015-07-19 10:00:00'));
-todo.addProp('SUMMARY', 'To Do (the purpose of creating this long string is to test the 75 character limit per the RFC)');
-todo.addProp('CATEGORIES', ['WORK', 'FAMILY']);
+const todo = new ICS.VTODO()
 
-event.addComponent(eventAlarm);
+todo.addProp('UID', '1')
+todo.addProp('DTSTAMP', new Date('2015-07-18 10:00:00'))
+todo.addProp('DUE', new Date('2015-07-19 10:00:00'))
+todo.addProp('SUMMARY', 'To Do (the purpose of creating this long string is to test the 75 character limit per the RFC)')
+todo.addProp('CATEGORIES', ['WORK', 'FAMILY'])
 
-cal.addComponent(event);
-cal.addComponent(todo);
+event.addComponent(eventAlarm)
+
+cal.addComponent(event)
+cal.addComponent(todo)
 
 const icsString = 'BEGIN:VCALENDAR\r\n' +
                   'VERSION:2.0\r\n' +
@@ -56,12 +58,12 @@ const icsString = 'BEGIN:VCALENDAR\r\n' +
                   ' haracter limit per the RFC)\r\n' +
                   'CATEGORIES:WORK,FAMILY\r\n' +
                   'END:VTODO\r\n' +
-                  'END:VCALENDAR';
+                  'END:VCALENDAR'
 
 describe('ics-js', () => {
   describe('creating an ICS file', () => {
     it('should return an ICS file as a string', () => {
-      assert.equal(cal.toString(), icsString);
-    });
-  });
-});
+      assert.equal(cal.toString(), icsString)
+    })
+  })
+})

@@ -1,4 +1,4 @@
-import DTSTAMP from './DTSTAMP';
+import DTSTAMP from './DTSTAMP'
 
 /**
  * LAST_MODIFIED property.
@@ -6,5 +6,5 @@ import DTSTAMP from './DTSTAMP';
  * @see https://tools.ietf.org/html/rfc5545#section-3.8.7.3
  */
 export default class LAST_MODIFIED extends DTSTAMP {
-  static propName = 'LAST-MODIFIED';
+  static propName = 'LAST-MODIFIED'
 }

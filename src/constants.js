@@ -3,4 +3,4 @@
  *
  * @type {string}
  */
-export const MIME_TYPE = 'text/calendar';
+export const MIME_TYPE = 'text/calendar'

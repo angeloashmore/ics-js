@@ -1,4 +1,4 @@
-import DTSTAMP from './DTSTAMP';
+import DTSTAMP from './DTSTAMP'
 
 /**
  * DTEND property.
@@ -6,5 +6,5 @@ import DTSTAMP from './DTSTAMP';
  * @see https://tools.ietf.org/html/rfc5545#section-3.8.2.2
  */
 export default class DTEND extends DTSTAMP {
-  static propName = 'DTEND';
+  static propName = 'DTEND'
 }

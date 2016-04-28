@@ -1,5 +1,5 @@
-import {formatDate} from '../helpers';
-import Property from '../Property';
+import { formatDate } from '../helpers'
+import Property from '../Property'
 
 /**
  * EXDATE property.
@@ -7,7 +7,7 @@ import Property from '../Property';
  * @see https://tools.ietf.org/html/rfc5545#section-3.8.5.1
  */
 export default class EXDATE extends Property {
-  static propName = 'EXDATE';
+  static propName = 'EXDATE'
 
   /**
    * Check if property's value is not an array of Date instances.
@@ -17,10 +17,10 @@ export default class EXDATE extends Property {
   shortTransformer () {
     if (Array.isArray(this.value)) {
       return !this.value.every((value) => {
-        return value instanceof Date;
-      });
+        return value instanceof Date
+      })
     } else {
-      return true;
+      return true
     }
   }
 
@@ -31,17 +31,17 @@ export default class EXDATE extends Property {
    * @returns {string} The property's transformed value.
    */
   transformer () {
-    const valueIsDate = this.props.VALUE === 'DATE';
+    const valueIsDate = this.props.VALUE === 'DATE'
 
     return this.value.map((value) => {
       if (valueIsDate) {
         // Remove timezone offset
-        const offset = value.getTimezoneOffset() * 60000;
+        const offset = value.getTimezoneOffset() * 60000
 
-        return formatDate(new Date(value.getTime() + offset), !valueIsDate);
+        return formatDate(new Date(value.getTime() + offset), !valueIsDate)
       }
 
-      return formatDate(value, !valueIsDate);
-    }).join(',');
+      return formatDate(value, !valueIsDate)
+    }).join(',')
   }
 }

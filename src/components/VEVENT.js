@@ -1,5 +1,5 @@
-import Component from '../Component';
-import {singleton, unique} from './validators';
+import Component from '../Component'
+import { singleton, unique } from './validators'
 
 /**
  * VEVENT class.
@@ -7,12 +7,12 @@ import {singleton, unique} from './validators';
  * @see https://tools.ietf.org/html/rfc5545#section-3.6.1
  */
 export default class VEVENT extends Component {
-  static componentName = 'VEVENT';
+  static componentName = 'VEVENT'
 
-  static requiredProps = ['DTSTAMP', 'UID'];
+  static requiredProps = ['DTSTAMP', 'UID']
 
   static validProps = {
-    /* eslint-disable key-spacing, sorting/sort-object-props */
+    /* eslint-disable key-spacing */
     DTSTAMP:           [singleton()],
     UID:               [singleton()],
 
@@ -46,7 +46,7 @@ export default class VEVENT extends Component {
     RELATED:           [],
     'REQUEST-STATUS':  [],
     RESOURCES:         []
-    /* eslint-enable key-spacing, sorting/sort-object-props */
+    /* eslint-enable key-spacing */
   }
 
   static validComponents = {

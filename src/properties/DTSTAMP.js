@@ -1,5 +1,5 @@
-import {formatDate} from '../helpers';
-import Property from '../Property';
+import {formatDate} from '../helpers'
+import Property from '../Property'
 
 /**
  * DTSTAMP property.
@@ -7,7 +7,7 @@ import Property from '../Property';
  * @see https://tools.ietf.org/html/rfc5545#section-3.8.7.2
  */
 export default class DTSTAMP extends Property {
-  static propName = 'DTSTAMP';
+  static propName = 'DTSTAMP'
 
   /**
    * Check if property's value is not an instance of Date.
@@ -15,7 +15,7 @@ export default class DTSTAMP extends Property {
    * @returns {boolean} Whether the property's value is transformed.
    */
   shortTransformer () {
-    return !(this.value instanceof Date);
+    return !(this.value instanceof Date)
   }
 
   /**
@@ -25,18 +25,18 @@ export default class DTSTAMP extends Property {
    * @returns {string} The property's transformed value.
    */
   transformer () {
-    let value;
-    const valueIsDate = this.props.VALUE === 'DATE';
+    let value
+    const valueIsDate = this.props.VALUE === 'DATE'
 
-    value = this.value;
+    value = this.value
 
     if (valueIsDate) {
       // Remove timezone offset
-      const offset = this.value.getTimezoneOffset() * 60000;
+      const offset = this.value.getTimezoneOffset() * 60000
 
-      value = new Date(this.value.getTime() + offset);
+      value = new Date(this.value.getTime() + offset)
     }
 
-    return formatDate(value, !valueIsDate);
+    return formatDate(value, !valueIsDate)
   }
 }

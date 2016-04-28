@@ -5,7 +5,7 @@
   "main": "dist/ics-js.js",
   "scripts": {
     "lint": "standard",
-    "test": "mocha",
+    "test": "npm run lint && mocha",
     "build": "webpack --progress --colors",
     "doc": "esdoc -c esdoc.json"
   },
@@ -43,6 +43,9 @@
     "simple-guid": "0.0.1"
   },
   "standard": {
+    "globals": [
+      "Blob"
+    ],
     "ignore": [
       "/dist/"
     ],

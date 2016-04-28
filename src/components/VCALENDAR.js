@@ -1,5 +1,5 @@
-import Component from '../Component';
-import {singleton} from './validators';
+import Component from '../Component'
+import { singleton } from './validators'
 
 /**
  * VCALENDAR class.
@@ -7,18 +7,18 @@ import {singleton} from './validators';
  * @see https://tools.ietf.org/html/rfc5545#section-3.4
  */
 export default class VCALENDAR extends Component {
-  static componentName = 'VCALENDAR';
+  static componentName = 'VCALENDAR'
 
-  static requiredProps = ['PRODID', 'VERSION'];
+  static requiredProps = ['PRODID', 'VERSION']
 
   static validProps = {
-    /* eslint-disable key-spacing, sorting/sort-object-props */
+    /* eslint-disable key-spacing */
     PRODID:    [singleton()],
     VERSION:   [singleton()],
 
     CALSCALE:  [singleton()],
     METHOD:    [singleton()]
-    /* eslint-enable key-spacing, sorting/sort-object-props */
+    /* eslint-enable key-spacing */
   }
 
   static validComponents = {

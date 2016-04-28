@@ -1,4 +1,4 @@
-import Property from '../Property';
+import Property from '../Property'
 
 /**
  * CATEGORIES property.
@@ -6,7 +6,7 @@ import Property from '../Property';
  * @see https://tools.ietf.org/html/rfc5545#section-3.8.1.2
  */
 export default class CATEGORIES extends Property {
-  static propName = 'CATEGORIES';
+  static propName = 'CATEGORIES'
 
   /**
    * Check if property's value is an array.
@@ -14,7 +14,7 @@ export default class CATEGORIES extends Property {
    * @returns {boolean} Whether the property's value is transformed.
    */
   shortTransformer () {
-    return !Array.isArray(this.value);
+    return !Array.isArray(this.value)
   }
 
   /**
@@ -23,6 +23,6 @@ export default class CATEGORIES extends Property {
    * @returns {string} The property's transformed value.
    */
   transformer () {
-    return this.value.join(',');
+    return this.value.join(',')
   }
 }

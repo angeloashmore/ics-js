@@ -95,10 +95,7 @@ event.addProp('UID');
 event.addProp('DTSTAMP', new Date('2015-07-18 10:00:00'), { VALUE: 'DATE-TIME' });
 event.addProp('ATTENDEE', null, {
   CN: 'Sample Company',
-  RSVP: [
-    'FALSE:mailto:foo@example.com',
-    'TRUE:mailto:bar@example.com'
-  ]
+  RSVP: 'FALSE:mailto:foo@example.com'
 })
 
 cal.addComponent(event);

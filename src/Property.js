@@ -99,7 +99,11 @@ export default class Property {
     const hasProps = Object.keys(this.props).length > 0
     const key = this.constructor.propName + (hasProps ? ';' + this.transformedProps() : '')
     const value = this.transformedValue()
-    const keyValuePair = key + ':' + value
+
+    let keyValuePair = key
+    if (value) {
+      keyValuePair += ':' + value
+    }
 
     return keyValuePair.match(/.{1,75}/g).join('\r\n ')
   }

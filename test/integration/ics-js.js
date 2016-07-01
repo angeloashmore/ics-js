@@ -15,6 +15,13 @@ event.addProp('DTSTAMP', new Date('2015-07-18'), { VALUE: 'DATE' })
 event.addProp('SUMMARY', 'Birthdate')
 event.addProp('DTSTART', new Date('1991-03-07 07:00:00'), { VALUE: 'DATE-TIME' })
 event.addProp('DTEND', new Date('1991-03-07 19:30:00'))
+event.addProp('ATTENDEE', null, {
+  CN: 'Sample Company',
+  RSVP: [
+    'FALSE:foo@example.com',
+    'TRUE:bar@example.com'
+  ]
+})
 
 const eventAlarm = new ICS.VALARM()
 
@@ -44,6 +51,7 @@ const icsString = 'BEGIN:VCALENDAR\r\n' +
                   'SUMMARY:Birthdate\r\n' +
                   'DTSTART;VALUE=DATE-TIME:19910307T070000\r\n' +
                   'DTEND:19910307T193000\r\n' +
+                  'ATTENDEE;CN=Sample Company;RSVP=FALSE:foo@example.com,TRUE:bar@example.com\r\n' +
                   'BEGIN:VALARM\r\n' +
                   'ACTION:DISPLAY\r\n' +
                   'TRIGGER:-PT12H\r\n' +

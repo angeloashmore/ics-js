@@ -1,4 +1,4 @@
-import difference from 'lodash/difference'
+import difference from 'lodash.difference'
 import isNode from 'detect-node'
 import { MIME_TYPE } from './constants'
 import * as properties from './properties'

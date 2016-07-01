@@ -1,4 +1,4 @@
-import difference from 'lodash/difference'
+import difference from 'lodash.difference'
 import Property from '../../Property'
 import Component from '../../Component'
 import { ValidationError } from '../../errors'

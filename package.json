@@ -40,7 +40,7 @@
   "dependencies": {
     "detect-node": "^2.0.3",
     "es6-error": "^1.0.0",
-    "lodash": "^4.8.2",
+    "lodash.difference": "^4.3.0",
     "simple-guid": "0.0.1"
   },
   "babel": {

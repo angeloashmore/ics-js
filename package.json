@@ -38,6 +38,7 @@
     "webpack": "^1.12.14"
   },
   "dependencies": {
+    "detect-node": "^2.0.3",
     "es6-error": "^1.0.0",
     "lodash": "^4.8.2",
     "simple-guid": "0.0.1"

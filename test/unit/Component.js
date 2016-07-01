@@ -5,6 +5,7 @@ import * as ICS from '../../src'
 import Component from '../../src/Component'
 import { VERSION } from '../../src/properties'
 import {
+  IncompatiblePlatformError,
   InvalidComponentError,
   InvalidProvidedComponentError,
   InvalidProvidedPropError,
@@ -192,30 +193,32 @@ describe('Component', () => {
     })
   })
 
-  // Tests involving Blob skipped since Node/io.js does not support it.
-
-  describe.skip('#toBlob()', () => {
+  describe('#toBlob()', () => {
     beforeEach(() => {
       component.addProp('VERSION', 2)
       component.addProp('PRODID', 'XYZ Corp')
     })
 
-    it('should return an instance of Blob', () => {
-      assert.equal(component.toBlob() instanceof Blob, true)
+    it('should throw an IncompatiblePlatformError', () => {
+      assert.throws(() => {
+        component.toBlob()
+      }, IncompatiblePlatformError)
     })
   })
 
-  describe.skip('toBase64()', () => {
+  describe('toBase64()', () => {
     beforeEach(() => {
       component.addProp('VERSION', 2)
       component.addProp('PRODID', 'XYZ Corp')
     })
 
-    it('should return a string starting with "data:text/calendar,"', () => {
-      const base64 = component.toBase64()
+    it('should return a string', () => {
+      assert.equal(typeof component.toBase64(), 'string')
+    })
 
-      assert.equal(typeof base64, 'string')
-      assert.equal(base64.startsWith('data:text/calendar,'), true)
+    it('should return a base64 encoded representation', () => {
+      const buffer = new Buffer(component.toString())
+      assert.equal(component.toBase64(), buffer.toString('base64'))
     })
   })
 })

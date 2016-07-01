@@ -1,7 +1,9 @@
 import difference from 'lodash/difference'
+import isNode from 'detect-node'
 import { MIME_TYPE } from './constants'
 import * as properties from './properties'
 import {
+  IncompatiblePlatformError,
   InvalidComponentError,
   InvalidProvidedComponentError,
   InvalidProvidedPropError
@@ -236,33 +238,31 @@ export default class Component {
    * Get a Blob representation of the component. Uses MIME_TYPE as the MIME
    * type.
    *
+   * Note: This is a browser-only function unless a Blob polyfill is provided.
+   *
+   * @throws {IncompatiblePlatformError} Blob is undefined. Usually due to running in Node without a polyfill.
    * @returns {Blob} Blob representation of the component.
    */
   toBlob () {
-    return new Blob([this.toString()], {type: MIME_TYPE})
+    if (typeof Blob === 'undefined') {
+      throw new IncompatiblePlatformError()
+    }
+
+    return new Blob([this.toString()], { type: MIME_TYPE })
   }
 
   /**
-   * Get a Base64 encoded string representation of the component. A Promise is
-   * used to allow the interpreter to process the base64 conversion.
+   * Get a Base64 encoded string representation of the component.
    *
-   * @returns {Promise<string, DOMError>} Promise that resolves with a Base64 encoded string.
+   * @returns {String} Base64 encoded string representation of the component.
    */
   toBase64 () {
-    const blob = this.toBlob()
-    const reader = new window.FileReader()
+    const string = this.toString()
 
-    return new Promise((resolve, reject) => {
-      reader.readAsDataURL(blob)
-      reader.onloadend = () => {
-        resolve(reader.result)
-      }
-      reader.onerror = () => {
-        reject(reader.error)
-      }
-      reader.onabort = () => {
-        reject()
-      }
-    })
+    if (isNode) {
+      return new Buffer(string).toString('base64')
+    } else {
+      return window.btoa(string)
+    }
   }
 }

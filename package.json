@@ -7,7 +7,7 @@
     "lint": "standard",
     "test": "npm run lint && mocha",
     "build": "webpack --progress --colors",
-    "publish": "npm run test && npm run build && npm publish",
+    "prepublish": "npm run test && npm run build",
     "doc": "esdoc -c esdoc.json"
   },
   "repository": {

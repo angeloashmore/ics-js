@@ -84,7 +84,8 @@ The following properties are implemented:
 | `UID` | `String` or none | If no input is provided, generates a random GUID |
 | `VERSION` | `Number` | Float with 1 decimal to spec |
 
-All other properties (e.g. `SUMMARY`, `LOCATION`) are stored as-is without transformations.
+All other properties (e.g. `SUMMARY`, `LOCATION`) are stored as-is without
+transformations.
 
 ### Nest a component
 
@@ -92,6 +93,13 @@ All other properties (e.g. `SUMMARY`, `LOCATION`) are stored as-is without trans
 const event = new ICS.VEVENT();
 event.addProp('UID');
 event.addProp('DTSTAMP', new Date('2015-07-18 10:00:00'), { VALUE: 'DATE-TIME' });
+event.addProp('ATTENDEE', null, {
+  CN: 'Sample Company',
+  RSVP: [
+    'FALSE:mailto:foo@example.com',
+    'TRUE:mailto:bar@example.com'
+  ]
+})
 
 cal.addComponent(event);
 ```

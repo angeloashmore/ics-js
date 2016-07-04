@@ -26,7 +26,7 @@ export default class DTSTAMP extends Property {
    */
   transformer () {
     let value
-    const valueIsDate = this.props.VALUE === 'DATE'
+    const valueIsDate = this.internalParameters.VALUE === 'DATE'
 
     value = this.value
 

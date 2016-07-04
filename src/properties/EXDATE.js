@@ -31,7 +31,7 @@ export default class EXDATE extends Property {
    * @returns {string} The property's transformed value.
    */
   transformer () {
-    const valueIsDate = this.props.VALUE === 'DATE'
+    const valueIsDate = this.internalParameters.VALUE === 'DATE'
 
     return this.value.map((value) => {
       if (valueIsDate) {

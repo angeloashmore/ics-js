@@ -14,10 +14,10 @@ export default class Property {
    * Create a new property.
    *
    * @param {*} value - Value of the property.
-   * @param {Object} [props={}] - Object of properties for the property. Object keys and values are directly injected.
+   * @param {Object} [parameters={}] - Object of parameters for the property. Object keys and values are directly injected.
    * @param {boolean} [skipTransformer=false] - Explicitly determine if the property's value is transformed.
    */
-  constructor (value, props, skipTransformer = false) {
+  constructor (value, parameters, skipTransformer = false) {
     /**
      * The property's value.
      *
@@ -26,12 +26,12 @@ export default class Property {
     this.value = value
 
     /**
-     * Object to store the property's properties.
+     * Object to store the property's parameters.
      *
      * @private
      * @type {Object}
      */
-    this.props = props || {}
+    this.internalParameters = parameters || {}
 
     /**
      * Determine if the property's value is transformed.
@@ -39,6 +39,15 @@ export default class Property {
      * @type {boolean}
      */
     this.skipTransformer = skipTransformer
+  }
+
+  /**
+   * Get a frozen object of the property's parameters.
+   *
+   * @returns {Property[]} Frozen object of the property's parameters.
+   */
+  parameters () {
+    return Object.freeze(Object.assign({}, this.internalParameters))
   }
 
   /**
@@ -76,18 +85,18 @@ export default class Property {
   }
 
   /**
-   * Get the property's properties formatted for string output.
+   * Get the property's parameters formatted for string output.
    *
-   * @returns {string} The property's properties formatted for string output.
+   * @returns {string} The property's parameters formatted for string output.
    */
-  transformedProps () {
-    const props = []
+  transformedParameters () {
+    const parameters = []
 
-    Object.keys(this.props).forEach((key) => {
-      props.push(key + '=' + this.props[key])
+    Object.keys(this.internalParameters).forEach((key) => {
+      parameters.push(key + '=' + this.internalParameters[key])
     })
 
-    return props.join(';')
+    return parameters.join(';')
   }
 
   /**
@@ -96,8 +105,8 @@ export default class Property {
    * @returns {string} String representation of the property.
    */
   toString () {
-    const hasProps = Object.keys(this.props).length > 0
-    const key = this.constructor.propName + (hasProps ? ';' + this.transformedProps() : '')
+    const hasParameters = Object.keys(this.internalParameters).length > 0
+    const key = this.constructor.propName + (hasParameters ? ';' + this.transformedParameters() : '')
     const value = this.transformedValue()
 
     let keyValuePair = key

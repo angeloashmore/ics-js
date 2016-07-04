@@ -5,11 +5,12 @@ import Property from '../../src/Property'
 
 const value = 'value'
 const prop = new Property(value)
-const propProps = {
+const propParameters = {
   KEY1: 'VALUE1',
   KEY2: 'VALUE2'
 }
-const propWithProps = new Property(value, propProps)
+const propWithParameters = new Property(value, propParameters)
+const propWithoutValue = new Property()
 
 describe('Property', () => {
   describe('#constructor()', () => {
@@ -41,20 +42,20 @@ describe('Property', () => {
     })
   })
 
-  describe('#transformedProps()', () => {
+  describe('#transformedParameters()', () => {
     it('should return a string', () => {
-      assert.equal(typeof prop.transformedProps(), 'string')
+      assert.equal(typeof prop.transformedParameters(), 'string')
     })
 
     describe('with no props', () => {
       it('should return an empty string', () => {
-        assert.equal(prop.transformedProps(), '')
+        assert.equal(prop.transformedParameters(), '')
       })
     })
 
     describe('with props', () => {
       it('should return a semicolon separated string', () => {
-        assert.equal(propWithProps.transformedProps(), 'KEY1=VALUE1;KEY2=VALUE2')
+        assert.equal(propWithParameters.transformedParameters(), 'KEY1=VALUE1;KEY2=VALUE2')
       })
     })
   })
@@ -68,6 +69,10 @@ describe('Property', () => {
       const regex = /.*:{1}.*/
 
       assert.equal(regex.test(prop.toString()), true)
+    })
+
+    it('should not have a trailing semicolon if no value is set', () => {
+      assert.equal(propWithoutValue.toString().endsWith(':'), false)
     })
   })
 })

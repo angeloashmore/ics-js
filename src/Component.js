@@ -88,11 +88,7 @@ export default class Component {
      */
     this.internalComponents = []
 
-    /** Issue IE10 fail #22
-     *
-     * binding of this in the constructor
-     */
-
+    // IE10 Fix: bind `this` in the consturctor.
     this.addProp = this.addProp.bind(this)
     this.props = this.props.bind(this)
     this.propNames = this.propNames.bind(this)
@@ -104,7 +100,6 @@ export default class Component {
     this.toString = this.toString.bind(this)
     this.toBlob = this.toBlob.bind(this)
     this.toBase64 = this.toBase64.bind(this)
-
   }
 
   /**

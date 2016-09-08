@@ -2,6 +2,8 @@
 
 Create ICS files in ES6. Works in Node.js or in the browser.
 
+**NOTE**: Please check out [`immutable-ics`](https://github.com/angeloashmore/immutable-ics) for a better JavaScript ICS solution.
+
 ## Status
 
 [![npm version](https://badge.fury.io/js/ics-js.svg)](http://badge.fury.io/js/ics-js)
